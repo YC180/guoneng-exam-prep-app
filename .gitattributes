@@ -1,0 +1,17 @@
+# 统一行尾：文本文件一律 LF（避免 Windows 检出时 CRLF 反复变动）
+* text=auto eol=lf
+
+# 二进制资源不做行尾转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff2 binary
+*.zip binary
+
+# 生成的题库与抽取文本体量大，diff 无意义，避免污染对比视图
+work/bank/questions.json -diff
+work/text2/** -diff
+work/text4/** -diff
+work/ocr/** -diff
+app/data/questions.js -diff

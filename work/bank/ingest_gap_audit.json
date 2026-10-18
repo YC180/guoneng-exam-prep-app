@@ -1,0 +1,594 @@
+[
+ {
+  "file": "11、面试学习资料包\\10、半结构化面试案例及解析（根据个人面试形式选择）\\2.半结构化面试简介（二）.txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 1168
+ },
+ {
+  "file": "11、面试学习资料包\\4、面试技巧+经验分享+总结+参考背诵\\参考背诵1.txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 1817
+ },
+ {
+  "file": "11、面试学习资料包\\4、面试技巧+经验分享+总结+参考背诵\\参考背诵2.txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 2488
+ },
+ {
+  "file": "11、面试学习资料包\\4、面试技巧+经验分享+总结+参考背诵\\参考背诵3.txt",
+  "alreadyIngested": false,
+  "parsed": 8,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 1071
+ },
+ {
+  "file": "11、面试学习资料包\\8、面试题3000（赠送；时间多可参考看）\\各省面试1000道.txt",
+  "alreadyIngested": false,
+  "parsed": 5,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 218771
+ },
+ {
+  "file": "3、【行测知识】国家能源行测部分分题型刷题提分题库\\图形推理350题及答案详解.txt",
+  "alreadyIngested": false,
+  "parsed": 66,
+  "verified": 61,
+  "mode": "unnumbered",
+  "chars": 38907
+ },
+ {
+  "file": "3、【行测知识】国家能源行测部分分题型刷题提分题库\\数字推理350题及答案详解.txt",
+  "alreadyIngested": true,
+  "parsed": 341,
+  "verified": 336,
+  "mode": "ocr_choice",
+  "chars": 51644
+ },
+ {
+  "file": "3、【行测知识】国家能源行测部分分题型刷题提分题库\\数学运算&思维策略400题及答案详解.txt",
+  "alreadyIngested": true,
+  "parsed": 429,
+  "verified": 429,
+  "mode": "ocr_choice",
+  "chars": 111962
+ },
+ {
+  "file": "3、【行测知识】国家能源行测部分分题型刷题提分题库\\言语理解400题及答案详解.txt",
+  "alreadyIngested": true,
+  "parsed": 385,
+  "verified": 384,
+  "mode": "ocr_choice",
+  "chars": 156227
+ },
+ {
+  "file": "3、【行测知识】国家能源行测部分分题型刷题提分题库\\资料分析图表分析题汇总及答案详解.txt",
+  "alreadyIngested": true,
+  "parsed": 214,
+  "verified": 214,
+  "mode": "ocr_choice",
+  "chars": 85245
+ },
+ {
+  "file": "3、【行测知识】国家能源行测部分分题型刷题提分题库\\逻辑推理精选400题及答案详解.txt",
+  "alreadyIngested": true,
+  "parsed": 334,
+  "verified": 314,
+  "mode": "ocr_choice",
+  "chars": 160083
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\计算机类\\1.计算机讲义\\笔试知识点之--ICT业务.txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 9117
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\计算机类\\1.计算机讲义\\笔试知识点之--计算机类-操作系统复习资料.txt",
+  "alreadyIngested": false,
+  "parsed": 27,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 9656
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\计算机类\\1.计算机讲义\\笔试知识点之--计算机类-数据库系统概论复习资料.txt",
+  "alreadyIngested": false,
+  "parsed": 12,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 30933
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\计算机类\\1.计算机讲义\\笔试知识点之--计算机类-数据结构与算法知识点总结.txt",
+  "alreadyIngested": false,
+  "parsed": 11,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 19553
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\计算机类\\1.计算机讲义\\笔试知识点之--计算机类-计算机组成与体系结构总结.txt",
+  "alreadyIngested": false,
+  "parsed": 11,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 29909
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\计算机类\\1.计算机讲义\\笔试知识点之--计算机类-计算机网络复习资料.txt",
+  "alreadyIngested": false,
+  "parsed": 1,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 14367
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\计算机类\\2.计算机题库\\计算机类习题集.txt",
+  "alreadyIngested": false,
+  "parsed": 179,
+  "verified": 156,
+  "mode": "unnumbered",
+  "chars": 238708
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\财会类\\笔试知识点之--（财务类）会计学复习知识点讲义整理..txt",
+  "alreadyIngested": false,
+  "parsed": 4,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 16710
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\财会类\\笔试知识点之--（财务类）审计学复习知识点讲义整理..txt",
+  "alreadyIngested": false,
+  "parsed": 13,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 72094
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\财会类\\笔试知识点之--（财务类）成本管理会计重点整理..txt",
+  "alreadyIngested": false,
+  "parsed": 7,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 27746
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\财会类\\笔试知识点之--（财务类）税法主要知识点总结..txt",
+  "alreadyIngested": false,
+  "parsed": 10,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 16025
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\财会类\\笔试知识点之--（财务类）财务管理复习知识点讲义整理..txt",
+  "alreadyIngested": false,
+  "parsed": 9,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 48206
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\知识点之--（通信类）LTE基础知识.txt",
+  "alreadyIngested": false,
+  "parsed": 27,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 64789
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--ICT业务..txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 8950
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）信号与系统_复习知识总结.txt",
+  "alreadyIngested": false,
+  "parsed": 3,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 8473
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）光纤接入网技术.txt",
+  "alreadyIngested": false,
+  "parsed": 5,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 1769
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）宽带网接入技术知识点整理.txt",
+  "alreadyIngested": false,
+  "parsed": 15,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 12109
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）微波技术与天线_考试重点复习归纳.txt",
+  "alreadyIngested": false,
+  "parsed": 7,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 5073
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）接入网的基本概念与基础知识.txt",
+  "alreadyIngested": false,
+  "parsed": 3,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 5888
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）混合光纤同轴电缆接入的基本概念.txt",
+  "alreadyIngested": false,
+  "parsed": 3,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 6300
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）现代交换复习知识点.txt",
+  "alreadyIngested": false,
+  "parsed": 11,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 10919
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）电信基础知识题库.txt",
+  "alreadyIngested": false,
+  "parsed": 27,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 13311
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）计算机网络重要知识点.txt",
+  "alreadyIngested": false,
+  "parsed": 17,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 20028
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）通信原理知识点.txt",
+  "alreadyIngested": false,
+  "parsed": 6,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 43106
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）通信基础知识.txt",
+  "alreadyIngested": false,
+  "parsed": 3,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 10775
+ },
+ {
+  "file": "4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\\通信类\\笔试知识点之--（通信类）通信网优试题题库.txt",
+  "alreadyIngested": false,
+  "parsed": 135,
+  "verified": 1,
+  "mode": "numbered",
+  "chars": 198097
+ },
+ {
+  "file": "6、【国家能源集团招聘】12-25年笔试真题\\2014国电集团笔试试题真题及答案解析.txt",
+  "alreadyIngested": true,
+  "parsed": 20,
+  "verified": 13,
+  "mode": "numbered",
+  "chars": 19578
+ },
+ {
+  "file": "6、【国家能源集团招聘】12-25年笔试真题\\2015国电集团笔试试题真题及答案解析.txt",
+  "alreadyIngested": true,
+  "parsed": 49,
+  "verified": 42,
+  "mode": "numbered",
+  "chars": 16216
+ },
+ {
+  "file": "6、【国家能源集团招聘】12-25年笔试真题\\2016年国电集团招聘笔试真题及答案解析.txt",
+  "alreadyIngested": true,
+  "parsed": 50,
+  "verified": 49,
+  "mode": "ocr_choice",
+  "chars": 18526
+ },
+ {
+  "file": "6、【国家能源集团招聘】12-25年笔试真题\\2017国电集团招聘笔试真题及答案解析.txt",
+  "alreadyIngested": true,
+  "parsed": 49,
+  "verified": 48,
+  "mode": "ocr_choice",
+  "chars": 18593
+ },
+ {
+  "file": "6、【国家能源集团招聘】12-25年笔试真题\\2017年11月28日国电集团重组成立国家能源集团.txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 267
+ },
+ {
+  "file": "6、【国家能源集团招聘】12-25年笔试真题\\2020国家能源集团--春招笔试真题及答案.txt",
+  "alreadyIngested": false,
+  "parsed": 4,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 15836
+ },
+ {
+  "file": "6、【国家能源集团招聘】12-25年笔试真题\\2021国家能源集团--秋招笔试真题及答案.txt",
+  "alreadyIngested": false,
+  "parsed": 8,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 23373
+ },
+ {
+  "file": "6、【国家能源集团招聘】12-25年笔试真题\\2022国家能源集团招聘在线笔试完整真题及答案.txt",
+  "alreadyIngested": false,
+  "parsed": 4,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 20697
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年03月\\2024年3月时政热点试题及答案.txt",
+  "alreadyIngested": true,
+  "parsed": 136,
+  "verified": 113,
+  "mode": "ocr_sectioned",
+  "chars": 27342
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年04月\\2024年4时政热点试题及答案.txt",
+  "alreadyIngested": true,
+  "parsed": 124,
+  "verified": 90,
+  "mode": "ocr_sectioned",
+  "chars": 17786
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年05月\\2024年5月时政热点试题及答案.txt",
+  "alreadyIngested": true,
+  "parsed": 131,
+  "verified": 103,
+  "mode": "ocr_sectioned",
+  "chars": 21720
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年05月\\2024年5月时政热点（国内+国际）.txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 17721
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年06月\\2024年6月时政热点试题及答案.txt",
+  "alreadyIngested": true,
+  "parsed": 127,
+  "verified": 110,
+  "mode": "ocr_sectioned",
+  "chars": 20480
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年06月\\2024年6月时政热点（国内+国际）.txt",
+  "alreadyIngested": false,
+  "parsed": 1,
+  "verified": 0,
+  "mode": "unnumbered",
+  "chars": 18098
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年07月\\2024年7月时政热点试题及答案.txt",
+  "alreadyIngested": true,
+  "parsed": 148,
+  "verified": 140,
+  "mode": "ocr_sectioned",
+  "chars": 22291
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年07月\\2024年7月时政热点（国内+国际）.txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 19850
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年08月\\2024年8月时政热点试题及答案.txt",
+  "alreadyIngested": true,
+  "parsed": 124,
+  "verified": 97,
+  "mode": "ocr_sectioned",
+  "chars": 19496
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年08月\\2024年8月时政热点（国内+国际）.txt",
+  "alreadyIngested": false,
+  "parsed": 2,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 17696
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年09月\\2024年09月时政热点试题及答案.txt",
+  "alreadyIngested": true,
+  "parsed": 136,
+  "verified": 109,
+  "mode": "ocr_sectioned",
+  "chars": 22446
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年09月\\2024年09月时政热点（国内+国际）.txt",
+  "alreadyIngested": false,
+  "parsed": 1,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 18591
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年10月\\2024年10月时政热点试题及答案.txt",
+  "alreadyIngested": true,
+  "parsed": 109,
+  "verified": 95,
+  "mode": "ocr_sectioned",
+  "chars": 17944
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年10月\\2024年10月时政热点（国内+国际.txt",
+  "alreadyIngested": false,
+  "parsed": 1,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 16694
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年11月\\2024年11月时事政治模拟题及答案（160题）.txt",
+  "alreadyIngested": true,
+  "parsed": 152,
+  "verified": 139,
+  "mode": "numbered",
+  "chars": 25526
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【2025.4-2026.3】重要讲话考点预测300题（不定期更新，勿催）\\25年-26年重要讲话考点预测300题（更新至26年3月底）-纯题本.txt",
+  "alreadyIngested": false,
+  "parsed": 287,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 52294
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【2025.4-2026.3】重要讲话考点预测300题（不定期更新，勿催）\\25年-26年重要讲话考点预测300题（更新至26年3月底）.txt",
+  "alreadyIngested": true,
+  "parsed": 293,
+  "verified": 264,
+  "mode": "numbered",
+  "chars": 59304
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\2024-2025综合时政热点整理\\6.《乡村全面振兴规划（2024—2027年）》五星考点.txt",
+  "alreadyIngested": false,
+  "parsed": 14,
+  "verified": 14,
+  "mode": "numbered",
+  "chars": 13008
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\2025年中央一号文件\\思维导图  中共中央 国务院《关于进一步深化农村改革 扎实推进乡村全面振兴的意见》（合并）.txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 3147
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\2025年中央一号文件\\2025年中央一号文件-资料包\\【思维导图】2025年中央一号文件.txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 6812
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\2025年中央经济工作会议\\思维导图  2025.12经济工作会议（合并）.txt",
+  "alreadyIngested": false,
+  "parsed": 4,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 1961
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\2026年\\思维导图  2026年国务院政府工作报告.txt",
+  "alreadyIngested": false,
+  "parsed": 2,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 21129
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\中央经济工作会议时政\\1思维导图  2024.12中央经济工作会议(1).pdf.txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 1844
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\中央经济工作会议时政\\考点速记  2024.12中央经济工作会议.txt",
+  "alreadyIngested": false,
+  "parsed": 20,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 4425
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\二十届4中考点速记\\思维导图  第二十届中央委员会第四次全体会议公报.txt",
+  "alreadyIngested": false,
+  "parsed": 0,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 2887
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\重要讲话包\\❤【月更】24年-25年重要讲话考点预测400题（更新至25年7月底）-纯题本.txt",
+  "alreadyIngested": false,
+  "parsed": 370,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 68889
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\重要讲话包\\❤【月更】24年-25年重要讲话考点预测400题（更新至25年7月底）.txt",
+  "alreadyIngested": true,
+  "parsed": 373,
+  "verified": 332,
+  "mode": "numbered",
+  "chars": 71696
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\重要讲话包\\考点速记  2025.9.29中共中央政治局会议.txt",
+  "alreadyIngested": false,
+  "parsed": 6,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 1019
+ },
+ {
+  "file": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\政治理论\\政治理论重要考点梳理.txt",
+  "alreadyIngested": false,
+  "parsed": 12,
+  "verified": 0,
+  "mode": "numbered",
+  "chars": 34025
+ }
+]

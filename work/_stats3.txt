@@ -1,0 +1,34 @@
+﻿
+
+file                 : 4-1-EPI综合能力题库----常识题精选600道_.txt
+tu_ru                : 1
+answer_blocks        : 600
+jiexi_blocks         : 600
+ans_no_jiexi         : 600
+blocks_without_exp   : 0
+ascii_digits         : 2842
+missing_formula_hint : 0
+taobao               : 280
+
+file                 : 4-2-EPI综合能力题库----数字推理题精选300道详解_.txt
+tu_ru                : 6
+answer_blocks        : 334
+jiexi_blocks         : 334
+ans_no_jiexi         : 334
+blocks_without_exp   : 0
+ascii_digits         : 12772
+missing_formula_hint : 1
+taobao               : 122
+
+file                 : 4-3-EPI综合能力题库----数学运算、应用题精选400道详解_.txt
+tu_ru                : 2
+answer_blocks        : 409
+jiexi_blocks         : 408
+ans_no_jiexi         : 409
+blocks_without_exp   : 0
+ascii_digits         : 16498
+missing_formula_hint : 135
+taobao               : 188
+
+
+

@@ -1,0 +1,2875 @@
+# SOURCE: D:\DOWNLOADS\26国家能源集团通关资料\4、【专业知识】国家能源集团专业知识（近几年没考，可选看）\通信类\知识点之--（通信类）LTE基础知识.pdf
+# OCR: rapidocr dpi=200
+
+[[PAGE 1]]
+、LTE语音相关
+1.基础概念
+2.LTE语音实现方案
+3. VOIP.
+二、LTE知识总结
+1.TDD顿结构
+表4.2-1：特殊子顿配置(DwPTS/GP/UpPTS长度)
+10
+2. OFDM .
+10
+3.物理层处理细节
+4.HARQ.
+14
+5.信道类型
+14
+6.RS(Reference Signal)
+18
+7.TDD-LTE网络结构
+18
+8.层映射和预编码
+22
+9.LTE中PDSCH的资源分配
+10.TDDLTE和FDDLTE的区别
+28
+11.调度器
+3.4.4.2半静态调度（SPS）
+36
+3.4.4.2.1下行
+37
+3.4.4.2.2上行
+37
+三、LTE语音仿真平台
+38
+1.链路级仿真
+2.链路到系统级的映射
+42
+3.系统级仿真平台
+43
+4.业务模块
+53
+5.VoIP音质客观评测模块
+59
+四、精细理解
+64
+1.LTE中的上行时间同步
+64
+2.参考信号
+65
+3.同步信号设计
+66
+4.TDD与FDD的不同HARQ设计
+67
+
+[[PAGE 2]]
+五、其他常识：
+68
+
+[[PAGE 3]]
+一、LTE 语音相关
+1.基础概念
+CS语音:在 2G/3G冈
+网络中，语音一般由电路域交换（CircuitSwitch，CS）系统提
+供，因此我们一般也称之为CS语音。
+IMS语音：当IP多媒体子系统（IPMulti-media Subsystem，IMS）出现后，我们将
+IMS提供的语音业务称之为IMS语音，一般也可以称之为PS（分组域交换，Packet
+Switch）语音，这是因为IMS需要通过分组域交换网络提供的IP通道与用户终端进行交
+互。一般认为，IMS语音是LTE/EPS阶段提供的标准语音服务方案。
+全IP网络：随着IP技术的发展，电信网络逐渐废弃了传统七号信令网络，而全面转向
+全IP网络，以第三代伙伴项目（3GPP，3rdGenerationPartnershipProject）组织为例，LTE
+将采用全IP化核心网，抛弃了当前2G/3G系统中的电路交换域，而将分组交换域进行研
+究，从而定义了全IP的长期演进/演进分组系统网络LTE/EPS（Long Term
+Evolution/Evolved PacketSystem[1]）。因此在LTE/EPS网络中CS语音将不可用。
+由于语音业务对时延的要求比较高，在目前的3G及其以前的系统中，都通过电路域承
+载。利用专用资源。
+语音业务通过IP承载已经成为发展趋势。在LTE(Long TermEvolution)系统中，只存
+在分组域，语音业务通过VoIP(Voiceover InternetProtocol)承载。
+2.LTE语音实现方案
+LTE将采用全IP化核心网，从而带来对传统电路域语音业务承载的变革。
+CS回退（CSFallback）技术。使用CS回退技术可把语音业务从LTE网络转移到传
+统的2G或3G网络，通过传统的电路域进行语音承载。缺点：CS回退过程中将发生
+inter-RAT小区选择或切换，因此带来较大的呼叫建立延迟，且CS回退要求2G/3G网络
+与E-UTRAN网络重叠覆盖，没有传统2G/3G网络的新兴运营商无法采用此方案。
+SR-VCC方案。一般认为，IMS语音是LTE/EPS阶段提供的标准语音服务方案，但
+是基于IMS的VoIP技术只支持在存在分组域的网络发起语音业务，无法保证用户从E-
+UTRAN移动到GERANUTRAN/cdma20001X网络后的语音连续性。为此3GPP提出了
+基于IMS的SR-VCC方案，此方案支持将分组域的语音业务切换到电路域，但需要运营
+商部署IMS系统。
+VoLGA方案。考虑利用LTE接入网络，以数据包方式封装语音数据并透明传输到CS
+域的MSC服务器，从而实现在即使不存在UTRAN/GERAN/cdma20001X等传统接入网络
+的情况下，利用E-UTRAN接入网和传统的CS域核心网来提供CS语音业务。此方案需
+在网络侧增加VoLGA接入网络控制器(VANC)来实现语音业务管理。
+
+[[PAGE 4]]
+3. VOIP
+VOIP建立在IP技术上的分组化、数字化传输技术，其基本原理是：通过语音压缩算
+络把数据包传输到目的地，再把这些语音数据包串起来，经过解码解压处理后，恢复成原
+来的语音信号，从而达到由IP网络传送话音的目的。
+表1IP电话服务与传统电话服务的比较
+传统电话服务
+VolP
+电路交换技术
+分组交换技术
+传输使用同步时分多址，故带宽利用
+传输使用非同步时分多址，故带宽
+率较低
+利用率较高
+当线路拥塞时可能无法接通，而一旦
+当线路拥塞时，可能会出现分组丢
+接通就不会断开
+失等现象，会导致通信质量下降
+使用G.711脉冲编码调制，无压缩语音
+通常使用语音压缩编码，编码速率
+编码，传送速率为64Kbps
+可以从5.3Kbps至16Kbps
+除卫星通信外，端到端的时延很小，
+端到端的时延相对较长，并且有显
+并且抖动很有限
+著的抖动
+通信质量受到IP网络的影响很大，语
+能够保证良好的通信质量
+音质量难以保证
+通话线路是独立的，故而难以降低通
+共享IP网络资源，大大降低通信成本
+信成本
+3.1VoIP 的基本传输过程
+传统的电话网是以电路交换方式传输语音，所要求的传输宽带为64kbit/s.而所谓的
+VoIP是以IP分组交换网络为传输平台，对模拟的语音信号进行压缩、打包等一系列的特
+殊处理，使之可以采用无连接的UDP协议进行传输。
+为了在一个IP网络上传输语音信号，要求几个元素和功能。最简单形式的网络由两个
+或多个具有VoIP功能的设备组成，这一设备通过一个IP网络连接。VoIP模型的基本结构
+图如图下图所示。从图中可以发现VoIP设备是如何把语音信号转换为IP数据流，并把这
+些数据流转发到IP目的地，IP目的地又把它们转换回到语音信号。两者之音的网络必须支
+持IP传输，且可以是IP路由器和网络链路的任意组合。因此可以简单地将VoIP的传输过
+程分为下列几个阶段。
+1、语音-数据转换
+
+[[PAGE 5]]
+语音信号是模拟波形，通过IP方式来传输语音，不管是实时应用业务还是非实时应用
+业务，首先要对语音信号进行模拟数据转换，也就是对模拟语音信号进行8位或6位的量
+化，然后送入到缓冲存储区中，缓冲器的大小可以根据延迟和编码的要求选择。许多低比
+特率的编码器是采取以帧为单位进行编码。典型帧长为10~30ms.考虑传输过程中的代价，
+语音包通常由60、120或240ms的语音数据组成。数字化可以使用各种语音编码方案来
+实现，目前采用的语音编码标准主要有ITU-TG.711.源和目的地的语音编码器必须实现相
+同的算法，这样目的地的语音设备帮可以还原模拟语音信号。
+2、原数据到IP转换
+一旦语音信号进行数字编码，下一步就是对语音包以特定的帧长进行压缩编码。大
+部份的编码器都有特定的顺长，若一个编码器使用15ms的，则把从第一来的60ms的包
+分成4顿，并按顺序进行编码。每个帧合120个语音样点（抽样率为8kHz）。编码后，将
+4个压缩的顿合成一个压缩的语音包送入网络处理器。网络处理器为语音添加包头、时标
+和其它信息后通过网络传送到另一端点。语音网络简单地建立通信端点之间的物理连接
+（一条线路），并在端点之间传输编码的信号。IP网络不像电路交换网络，它不形成连
+接，它要求把数据放在可变长的数据报或分组中，然后给每个数据报附带寻址和控制信
+息，并通过网络发送，一站一站地转发到目的地。
+3、传送
+在这个通道中，全部网络被看成一个从输入端接收语音包，然后在一定时间（t）内将
+其传送到网络输出端。t可以在某全范围内变化，反映了网络传输中的抖动。网络中的同间
+节点检查每个IP数据附带的寻址信息，并使用这个信息把该数据报转发到目的地路径上的
+下一站。网络链路可以是支持IP数据流的任何拓结构或访问方法。
+4、IP包-数据的转换
+目的地VoIP设备接收这个IP数据并开始处理。网络级提供一个可变长度的缓冲器，
+用来调节网络产生的抖动。该缓冲器可容纳许多语音包，用户可以选择缓冲器的大小。
+小的缓冲器产生延迟较小，但不能调节大的抖动。其次，解码器将经编码的语音包解压
+缩后产生新的语音包，这个模块也可以按帧进行操作，完全和解码器的长度相同。若帧长
+度为15ms，，是60ms的语音包被分成4帧，然后它们被解码还原成60ms的语音数据流
+送入解码缓冲器。在数据报的处理过程中，去掉寻址和控制信息，保留原始的原数据，然
+后把这个原数据提供给解码器。
+5、数字语音转换为模拟语音
+播放驱动器将缓冲器中的语音样点（480个）取出送入声卡，通过扬声器按预定的频
+率（例如8kHz）播出。简而言之，语音信号在IP网络上的传送要经过从模拟信号到数字
+信号的转换、数字语音封装成IP分组、IP分组通过网络的传送、IP分组的解包和数字语音
+还原到模拟信号等过程。
+3.2关键技术
+语音编码标准：ITU-TG.711，数据速率为64kbit/s。
+压缩编码标准：有ITU-TG.723.1和ITU-TG.729，以及AMR等，其中ITU-TG.723.1
+的数据速率为5.3kbit/s或6.3kbit/s，而ITU-TG.729的数据速率为8kbit/s。
+
+[[PAGE 6]]
+注：G.711往往需要进一步压缩，因此它是其它语音编码算法的输入源。
+语音传输技术：先利用RTP/TRCP协议进行处理，再交给UDP进行传输。
+VoIP利用RTP实时传输协议传送数据。RTP是一个基于无连接UDP的应用协议，
+UDP是无连接的，它不会对数据包的传送提供应答和跟踪，这样RTP也不会重新传送网络
+的丢包，这就要求网络传输中应尽可能减少数据包的丢失；此外，按照TCP的应用协议，
+RTP也没有直接的碰撞控制，以致于因为发送者发送太多太快的数据包，接收者将被淹
+没。为了克服这个问题，RTP应用程序总是以固定速率发送数据包，这就要求网络能够
+尽量以固定的速率传输数据包。
+RTP分组由RTP头部和净荷数据组成；RTP分组由UDP包来进行传输，通常一个UDP包
+仅含一个RTP分组，若采用一定的封装方法，也可以包含多个RTP分组；其中的RTP净荷
+就是RTP传送的语音数据。
+控制信令技术：有两种（1）H.323协议是一个协议族，包含RAS、Q.931、H.245等
+一系列的协议，RAS协议用于呼叫接入控制等功能，Q.931协议用于实现呼叫控制，而
+H.245协议用于媒体信道控制（2）SIP协议采用的是客户机/服务器（C/S）结构，定义了
+各种不同的服务器和用户代理，通过和服务器之间的请求和响应来完成呼叫控制。
+3.3VoIP业务调度问题：
+首先介绍一下LTE系统中的资源调度。与传统3G技术不同的是，LTE系统采用下行
+OFDMA、上行SC-FDMA的接入方式，供基站进行调度的传输资源由以前3GCDMA系统
+的码域资源变成了时频二维资源。同时，LTE系统中取消了专用信道，采用共享信道的
+调度式资源分配方式，eNB（基站）可以根据不同用户的不同信道质量、业务的QoS要求
+以及系统整体资源的利用情况和干扰水平来进行综合调度，从而更加有效地利用系统资
+源，提高系统的吞吐量，使得无线资源可以得到最大限度的有效利用。但同时，这种调度
+方式带来的开销也是系统设计者必须考虑的问题之一
+用户
+信卫质量
+业务水车
+用户5
+用队列
+图1ITE系统的资源调度示意图
+
+[[PAGE 7]]
+在LTE系统中，取消了全部电路域的语音业务，而代之以数据域的VoIP业务。但由
+于语音用户的数量往往比较庞大，LTE又采用共享式调度的资源分配方式，每次传输都需
+要相关的控制信息，所以过大控制信息开销可能会成为LTE系统同时支持的用户数能达到
+的系统吞吐量的瓶颈。在LTE系统中，其带宽所能支持的VoIP用户数是其可调度指示用
+户数的5倍左右，于是，对于VoIP业务而言，LTE系统控制信息的不足将极大地限制其
+所同时支持的用户数。针对这类数据包大小比较固定，到达时间间隔满足一定规律的实时
+性业务，LTE引入了一种新的调度方式一一一半静态调度技术。
+LTE系统中，每个用户会配置独有的无线网络标识（RNTI），eNB通过用UE的
+RNTI对授权指示PD-CCH进行掩码来区分用户，对于同一个UE的不同类型的授权信
+息，可能会通过不同的RNTI进行授权指示。如对于动态业务，eNB会用UE的小区无线
+网络标识（C-RNTI）进行掩码，对于半静态调度业务，使用半静态小区无线网络标识
+(SPS-C-RNTI) 等。
+在LTE的调度传输过程中，起初eNB通过PDCCH指示UE当前的调度信息，UE识
+别是半静态调度，则保存当前的调度信息，每隔固定的周期在相同的时频资源位置上进行
+该业务数据的发送或接收。使用半静态调度传输，可充分利用语音数据包周期性到达的特
+点，一次授权，周期使用，可以有效地节省LTE系统用于调度指示的PDCCH资源，从而
+在不影响通话质量和系统性能的同时，支持更多的语音用户，并且为动态调度的业务保留
+一定的控制信息以供使用。
+以典型的VoIP业务为例，其数据包到达周期为20mS，则eNB只要通过PDCCH给
+UE半静态调度指示，UE即按照PDCCH的指示进行本次调度数据的传输或接收，并且
+在每隔20mS，在相同的时频资源位置上进行新到达的VoIP数据包的传输或接收。如图2
+所示，标记为绿色的资源即为UE周期进行发送或接收的资源位置。
+对于半静态调度传输，主要有3个关键的步骤，即半静态调度传输的激活、半静态调
+度传输的HARQ过程和半静态调度传输资源的释放。
+上是固定的。如果针对VoIP业务的这些小包采用动态调度方法，信令负荷会很大。在LTE
+系统中要达到一定的VoIP用户容量，需要减少开销。因此，提出了持续调
+度（PersistentScheduling）的方法，即为VoIP业务周期性的持续分配资源。如何利用VoIP业
+务的特点进行有效的调度，保证QoS(Qualityof Service)，最大程度的减少信令开销，是需
+要研究的问题。
+VoIP业务存在三个状态：瞬态、激活期和静默期。瞬态包只发生在会话开始以及会话
+过程中，包的头没有进行头压缩，因此这个状态的包比较大，包大小为97byte。激活期的包
+为进行了头压缩的语音业务的数据，包大小为35～49byte。在静默期没有语音数据传输，
+只有由于背景噪声产生的SID(Silence Descriptor)包，包大小为10～24byte。以上包的大小
+值都是基于AMR(AdaptiveMultiRate）声码器，速率为12.2kbps。包到达间隔是固定的，
+在瞬态/激活期时为20mS，静默期为160mS。从业务模型可以看出，VoIP业务具有包比较小，
+包的大小比较固定，到达间隔比较固定的特点。VoIP业务的调度方案应当充分利用这些特
+点，优化系统性能。
+参考：LTE系统语音业务调度研究（1)；LTE系统的半静态调度传输解决方案。
+
+[[PAGE 8]]
+3.4VoIP 中的QoS 保障技术
+主要包括抖动平滑技术、丢包处理技术、拥塞控制技术、回声消除技术以及静默压缩
+技术等，至于降低延时的问题，需要考虑网络拥塞，并对链路层延时或抖动缓冲（Jitter
+Buffer）延时进行改善。
+3.5 有关 QoS 的 3GPP 标准
+二、LTE 知识总结
+1.TDD 顿结构
+TD-LTE系统采用3GPP定义的type2帧结构[3]，如图2所示。
+Onc rado lramc 7= 30720C , = ICms
+Onchaiframc15350cT=5ms
+Cne siol
+,=1536C 
+Sutframe e?
+Subfrarre #3
+Sutfrare e0
+Sutfrare #2
+Subfiarrie M
+Subf ame #5
+Subfrare *8
+Subfrarne wg
+One
+subf'sme
+30726T
+UμPT
+GF
+DuPTS
+UpPT
+图1
+顿结构type2（5ms切换点周期）
+顿长为10ms，每个无线顿由两个5ms长的半顿组成。每个半由5个1ms长的子顿
+组成，每个半帧包括8个时长0.5ms的时隙，和3个特殊时隙：DwPTS，GP和UpPTS。
+三者的总时长为1mS。每个特殊时隙的长度可变。其它时隙的长度和OFDM符号的长度与
+FDD保持一致。该帧结构支持5ms和10ms切换点周期。
+如果下行到上行转换点周期为5ms，
+特殊子顿会存在于两个半顿中；
+如果下行到上行转换点周期10ms
+特殊子帧只存在于第一个半帧中。
+子帧0和子帧5以及 DwPTS 总是用于下行传输。UpPTS 和紧跟于特殊子帧后的子帧
+专用于上行传输。
+DwPTS 
+传什么和特殊子顿的配置有关，某些配置下的DwPTS只能传
+某些配置
+下的DwPTS可以同时传下行数据，
+只是可用PRB数有限制，可以参考36.211和36.213
+DwPTS和UpPTS的长度可配置，1
+DwPTS的长度为3～12 个OFDM符号，UpPTS 的
+长度为1～2个OFDM符号，相应的GP长度为1～10个OFDM符号。
+
+[[PAGE 9]]
+DwPTS也可用于传输PCFICH、PDCCH、PHICH、PDSCH和P-SCH（主同步信号）
+等控制信道和控制信息。其中，DwPTS时隙中下行控制信道的最大长度为两个符号
+且主
+同步信道固定位于DwPTS的第三个符号。
+Up link-downlink
+Downlink-to-Uplink
+Subframenumber
+configuration
+Switch-point periodicity
+5 ms
+sssssss
+ss
+5 ms
+5 ms
+10 ms
+10 ms
+10 ms
+5 ms
+从图中可以看到，子顿0和5传输的总是下行子顿。子1传输的总是特殊子顿。并
+且特殊子帧后传输的总是上行子帧。
+在上述的几种配置中，0一2和6的配置，从下行到上行的转化周期为5s,由于从下行
+转换为上行时，首先发送特殊子顿，意味着特殊子顿的出现周期为5秒，也就是说，子顿
+1和子帧6传输的是特殊子帧。
+配置3，4，5中，下行到上行的转换周期为10s。
+这里经常会有疑问，为何只有下行subframe到上行subframe之间有隔离（GP），而
+在上行subframe到下行subframe之间没有有隔离（GP）？
+在36.211，Section8里面提到，上行发送的时间是：
+TA+TAoffset,TAoffset固定为624个Ts，前面是基站进行上行同步用的，后面这个就是上
+行提前了发送的时间了,也就是可以理解为上行到下行的时间间隔。
+特殊子帧包含三个部分：DwPTS(downlink pilottime slot),GP(guard
+period),UpPTS(uplink pilot time slot)。DwPTS传输的是下行的参考信号，也可以传输一些控
+制信息。UpPTS上可以传输一些短的RACH和SRS的信息。GP是上下行之间的保护时
+间。
+同其他的子帧相同，特殊子帧的长度也是1S。但其中各个部分的长度是不同的，是可
+以通过高层信令配置的。如下图所示：
+Extended cyclic prefix length in
+Special
+Normal cyclic prefix length in
+OFDM symbols
+subframe
+OFDM symbols
+UpPTS
+DwPTS
+DWPTS
+UpPTS
+configuration
+10
+10
+10
+11
+12
+10
+
+[[PAGE 10]]
+相对而言，UpPTS的长度比较固定，只支持一个符号、两个符号两种长度，以避免过
+多的选项，简化系统设计，GP和DwPTS具有很大的灵活性，这主要是为了实现可变的
+GP长度和GP位置，以支持各种尺寸的小区半径。
+表4.2-1:特殊子帧配置(DwPTS/GP/UpPTS长度）
+常规循环前缀，下行
+常规循环前缀，上行
+UpPTS
+DwPTS
+UpPTS
+特殊子
+常规循环
+扩展循环
+配置
+DwPTS
+常规循环前
+扩展循环前
+前缀，上
+前缀，上
+缀，上行
+缀，上行
+6592 T,
+7680 . T,
+19760 · T,
+20480 . T,
+2560.T
+2192 . T,
+21952 T,
+23040 T,
+2192 .T,
+2560.Ts
+24144 . T,
+25600 · T,
+26336. T,
+7680 . T.
+5120.T
+6592 - T,
+20480 T.
+4384.T,
+19760 . T,
+23040 . T,
+4384. T
+5120 . T,
+21952.T.
+24144. T.
+2. OFDM
+(Orthogonal Frequency Division Multiplexing)
+即交频分复用技术，实际上OFDM是多载波调制的一种。其主要思想是：将信道分
+成若干正交子信道，将高速数据信号转换成并行的低速子数据流，调制到在每个子信道上
+进行传输。正交信号可以通过在接收端采用相关技术来分开，这样可以减少子信道之间的
+相互干扰ICI(Inter-ChannelInterference)。每个子信道上的信号带宽小于信道的相关带宽，
+因此每个子信道上的可以看成平坦性衰落，从而可以消除符号间干扰。而且由于每个子信
+道的带宽仅仅是原信道带宽的一小部分，信道均衡变得相对容易。
+OFDM的循环前缀CP：循环前缀为单个的OFDM符号创建一个保护带，在信噪比边
+缘损耗中被丢掉，以极大地减少符号间干扰。信道有多径时延，如果没有CP，时间上，
+OFDM符号之间就会因为信道多径影响而相互干扰，从而破坏了子载波之间的正交性，大
+大降低性能。加了CP之后，就是避免OFDM符号之间相互干扰，因此CP的长度是有讲
+究的，一定要大于最大多径时延。OFDM的循环前缀（CP）可以使接收OFDM呈现循环
+卷积。循环卷积就可进行FFT计算，FFT变换就是正交载波调制的。特点：1它必须是
+OFDM符号最后一段时间的重复2CP时间必须大于时延扩展，否则不能完全消除子载波
+间干扰（ICI）。
+OFDM包络的不恒定性可以用PAPR来表示。PAPR(PeaktoAveragePowerRatio)是峰值
+功率与平均功率之比。PAPR越大，系统的包络的不恒定性越大。因此要改善系统性能，
+就是要设法减小PAPR。
+
+[[PAGE 11]]
+3.物理层处理细节
+功率因子
+E-NodeB基带一业务信道处理链
+天线口
+符号流
+资源元
+OFDM信号
+映射
+Turbo编码
+速率匹配
+码字流
+产生
+第1个数据
+CRC
+码块
+码块
+调制映射
+附加
+分割
+流产生
+级联
+层映射
+Turbo编码
+速幸匹配
+预编码
+1.单天线
+1.单天线
+2.复用
+2.复用
+3.分集
+速率匹配
+Turbo编码
+3.分集
+第M个数
+码块
+码块
+CRC
+码字流
+调制映射
+天线口
+附加
+分割
+据流产生
+级联
+符号流
+资源元
+OFDM信号
+Turbo编码
+速率匹配
+映射
+产生
+功率因子
+salerj
+对于负责向高层提供数据传输服务的LTE物理层，它可以通过MAC子层并使用传输
+信道来接入这些服务。为了支持成对的和不成对的频谱，支持频分双工（Frequency
+Division Duplex.FDD）模式和时分双工（Time Division Duplex.TDD）模式。
+物理层是基于资源块以带宽不可知的方式进行定义的，从而允许LTE物理层适用于
+不同的频谱分配。一个资源块在频域上或者占用12个带宽为15KHz的子载波，或者占
+用24个宽度为7.5KHz的子载波，在时域上持续时间为0.5ms。
+在每个无线帧中，又引入RE（ResourceElement）的概念，通过上层调度进行资源
+分配，同时将数据映射到相应的RE上并通过无线帧传输将数据和控制信令发出。
+在具体的实现过程中，系统的发送侧和接收侧需要区分比特级和符号级进行处理。以
+发送侧为例，比特级处理是数据处理的前端，主要是将二进制数据进行添加CRC校验
+位、信道编码、速率匹配以及加扰的处理之后发送至下一级处理；符号级处理则是将加扰
+之后数据进行调制、层映射、传输预编码、资源块映射并经过天线将数据发送出去。
+3.1UE侧编码原理
+首先以数据信道为例来简单研究下发送侧的编码原理。
+首先对输入的TB块进行CRC添加和码块分割以及后继的CRCCB块添加。这里需
+要注意的是，TB块CRC和CB块CRC虽然同为24比特，但是生成多项式却是不同的。
+采用CRC校验时，发送方和接收方用同一个生成多项式g（x）。CRC校验时，以计
+算的校正结果是否为0为据，判断数据是否出错。这样做主要是实现接收侧CRC的双重
+校验，TB块的校验可以检出CB块未校验出的错误，保证校验的准确性。
+特别需要注意的是，Turbo编码只适用于下行的PDSCH编码，对于PBCH和
+PDCCH都需要用咬尾卷积编码，其输出至速率匹配的三部信号分为对应于三个不同的转
+移函数，其中 0dkG0=133(octal)，11 171()kdG=octal ，22 165()k d G=octal 。
+速率匹配部分主要作用是将1/3码率输出的编码数据进行速率整合，以使其适合
+HARQ重传的需求。首先三路信道会分别经过信道交织。此交织为典型的分组交织，行读
+入，列读出。循环缓冲区将之前的三路信号顺序全部读入到相应位置，读出时根据RV值
+计算出CB块的起点位置将数据依次读出。需要注意的是，之前信道交织中有可能添加进
+
+[[PAGE 12]]
+来的填充比特在读出过程中需要丢掉。再经过码块级联，即完成发送侧的数据信道编码。
+为基于CB块的速率匹配结构图。
+对于控制信道的（包括PDCCH和PBCH）速率匹配，首先由上层根据UE报告的宽带
+CQI值确定PDCCH的格式（即PDCCH占用的CCE的个数），然后根据占用的CCE的个
+数进行速率匹配。信道条件好，信道码率可以提高，即可以占用较少的CCE；信道条件
+差，信道码率可以降低，即可以用较多的CCE进行控制信息的传输。算法实现上，在接收
+到循环卷积编码后的三路数据之后，经过与PDSCH原理大致相同的交织处理过程。只是
+在比特收集和筛选过程中，是将数据收集到循环缓冲区之后直接按CB块输出，而无需通
+过RV值选择输出数据的起点接收侧，三条信道的译码过程主要是发送端编码的逆过程。
+但是由于每条信道的各自特性，过程又稍有不同。
+3.2LTE下行比特级译码实现设计
+3GGP 下行主要包括 PBCH(Physical Broadcasting Channel)、PDCCH(Physical
+DownlinkControl Channel)、PDSCH(Physical Downlink Shared Channel)、PHICH(Physical
+HARQIndicator Channel )、PCFICH(Physical Control Format Indicator Channel)五 个传输信
+道。其中,PHICH和 PCFICH在解调的时候就将其检出并将数据反馈给高层，故而在比特级
+并不对其做处理。下行译码过程主要涉及到PDSCH、PDCCH和PBCH三条信道。这三条
+信道的译码过程如所示。
+3.2.1PBCH信道译码过程
+PBCH作为广播信道，主要用于UE初始化接入网络和小区初始化建立时对整个小区
+系统配置消息进行广播。LTE3GPP中指出在发送侧PBCH的原始MIB（theMaster
+InformationBlock）信息为24比特，对其进行16比特CRC添加后进行编码以及后续处
+理。
+在接收侧，由于PBCH信道在物理层配置是完全静态的并且不支持任何自适应调度和
+重传，因此，为了保证PBCH信道的可靠性传输，鉴于它码率非常低
+（(24+16)/1920=0.0204），因此在解调、解速率匹配时需要将解扰后的软比特块进行多次
+重复的软合并，解速率匹配后的序列被送往信道译码模块；由于PBCH信道传输数据量较
+小，故PBCH采用Viterbi算法进行译码。译码器输出比特序列还需要用相应天线数对应的
+天线mask扰码进行解扰，进行CRC校验，最终完成子帧的检测。
+鉴于其他过程的通用性，这里只对PBCH的子帧检测的是是实现过程进行着重研究。
+在子帧自解码的过程中，接收到的子帧内比特分别与4个扰码子块进行解扰、译码处
+理，如果信道条件足够好的话，在同某一个扰码子块处理过程中可以实现子帧的自解码，
+从而可以判断出无线帧的序号，也就是当前无线顿在PBCH的TTI中的位置。
+如果利用一个子顿中的接收数据不能实现自解码，则可以连续接收第二个无线帧中的
+PBCH传输块，并且利用两个无线帧的数据一起进行检测，在解扰过程中也将两个连续的
+CB块一起操作，从而提高检测概率。依此类推，直至实现PBCH的正确接收。
+接收端的PBCH检测过程的具体过程是这样的：
+（1）从相应的时频位置获得PBCH信号：
+（2）根据发射、接收天线数，采用相应的算法对PBCH信号进行均衡；
+（3）进行QPSK符号解调，得到软比特信息；
+（4）利用CBO解扰码序列进行解扰处理；
+（5）从序列的起始位置提取编码比特，并且将编码序列送入译码器进行译码了；
+
+[[PAGE 13]]
+（6）根据发射天线数利用相应的天线掩码对译码序列进行解扰处理；
+（7）对解扰的序列进行CRC校验，如果正确，则检测成功，从而可以判断当前接收
+到的无线顿的序号；如果错误，则分别利用CB1、CB2、CB3重复步骤4一7，在步骤5读
+取码字序列；
+（8）如果上述过程仍不能正确检测出PBCH信息，终端顺序接收下一个无线顿的
+PBCH信息，利用两个无线顿的数据进行联合译码处理。
+这里需要注意的是，由于PBCH内传输子顿序号信息，因此每个TTI内的PBCH信息
+是不一样的，因此不同TTI内的PBCH子块联合检测会导致检测失败。在上述的检测过程
+中，如果利用一个接收子内的数据检测失败，会联合下一个无线顿内的PBCH子块进行
+联合检测，而此时如果这两个子块位于同一个PBCHTTI内，会提高检测概率，而如果两
+个子块属于不同的TTI，则会导致检测失败，此时可以顺序接收下面的PBCH子块，如果
+利用连续的四个子块仍不能成功检测，再接收下一个子块，同时将第一个子块数据丢弃，
+利用最后接收到的连续四个子块进行联合检测，如此重复，直至检测成功为止。该检测过
+程的流程所示。
+3.2.2PDCCH信道译码过程
+PDCCH信道主要携带调度分配和其他的控制信息，所有的信息都包含在DCI
+（DownlinkControlInformation）中。主要是根据调度的不同需要，DCI所采取的格式和其
+中的信息也有所差别，但是实现方式基本一致。DCI的原始比特长度根据格式的不同有所
+差别（format0,1A,3长度为31比特（format0和1A是通过DCI信息中的FLAG标志位；
+format3 则是通过被 common identity,rather than UE-specific identity 加扰进行区分）;format 1
+长度为42比特；format1B长度为33比特；format2长度为54比特；format2A长度为51比
+特，该统计均是在上下行带宽20MHz，天线个数1~2的简化需求下计算得到的，仅作为举
+例）。至于采用哪种格式的DCI,则由高层根据调度请求的不同进行配置后发给物理层。
+DCI信息长度为n，从PDCCH对应的CCE中经解调解扰提取出f(n)个软比特信息。按照
+需要检测的DCI信息长度为n进行软合并；然后送往咬尾比特卷积码译码器做信道译码；
+当盲检DCIformatO且UE被高层配置天线选择时，用相应RNTI和天线选择掩码解扰
+CRC校验比特部分并进行CRC校验；否则用相应RNTI解扰CRC校验比特部分并进行
+CRC校验；输出CRC校验结果，如果校验正确，输出DCI复用信息比特以及可能的天线
+选择信息。
+这里，对于UE侧的一个问题就是：由于在发送端eNodeB会针对多个UE同时发送
+PDCCHs，在接收端如何实现对这多个PDCCHs的检测以保证UE接收到相应的控制信
+息，同时又不会为系统带来多余信令的消耗。
+在实现上，这点也体现了PDCCH信道与其他信道译码最大的不同，即在CRC校验之
+的UE接收到，需要设定一个DCI的搜索空间，同时针对不同的传输过程，需要检测DCI
+的不同格式和被加扰RNTI并解出DCI中包含相应的信道控制的信息并反馈给高层。因
+此，为了防止提高检测效率，针对不同的调度和传输情况，设定了特定搜索空间（specific
+searchspace）和公共搜索空间(common search space)。
+在CRC校验部分，除了完成正常的去校验位并得到DCI数据的基本功能外，还需要
+且检测出当前RNTI 和DCI类型。在得到这些检测基本信息之后，将数据传向unpack部
+分，进行DCI解包分析。
+2.3PDSCH信道译码过程
+
+[[PAGE 14]]
+PDSCH信道主要用来携带下行链路的数据信息，也承载一部分PBCH信道中没有承
+载的广播消息(SIB,System Information Block,包含一部分小区选择和调度信息)。数据在
+PDSCH上以 Transport Block(以下简称TB块)的形式进行传输，这些TB块对应于MAC
+层的PDU（ProtocolDataUnit）。每一个TTI,TB块都从MAC层传到物理层，在接收侧经
+过符号级（接收侧解调之前）的处理，在解扰后到达比特级译码部分。在发送端，为了满
+足 Turbo 编码的需求，需要将一个大的 TB块分成若干 Code Block(以下简称CB块)，大
+小从40到6144比特不等。在接收端
+，在Turbo译码之后，也需要先经过码块级联再进行
+CRC校验，最后将传输数据反馈给高层。
+4.HARQ
+允许接收端将错误的数据包储存起来，并将当前接收到的重复数据流与缓存中先前未
+能正确译码的数据流相对应并按照信噪比加权合并后译码，相当于起到了分集的作用。可
+以分为相位合并
+：（Chase Combination,CC）HARQ和增量余
+(Incremental Redundancy,
+IR）HARQ两种。在CCHARQ中，各次重传分组相同，接收端通过最大比合并各次重传
+数据流，从而获得分集增益改善链路质量。在IRHARQ中，各次重传分别按照不同的亢
+余版本，将各次重传数据流合并后，接收端将获得一个穴余更多码率更低的码字，从而提
+高码字被正确译码的概率，改善链路质量。
+HARQ主要是由速率匹配这个模块进行实现的。UE接收到NAK信息后向eNodeB
+重传同一个TTI的数据包，接收端将解速率匹配模块输出的数据流与收端缓存中的数据流
+进行软合并，然后进行Turbo译码和CRC校验。如此重复直到传输正确或者重传次数达到
+预定的最大重传次数为止，UE接着再发送下一个TTI的数据块。在进行重传时，若采用
+CCHARQ，速率匹配时穴余版本号为O；若采用IRHARQ时，速率匹配时亢余版本号则
+为0,1,,rmax（maxr为最大重传次数)。对于CC方式，重传的子数据包与第一次传输的
+子数据包完全相同，即datall：对于IR方式，重传的子数据包中包含额外的校验位
+(datal2.datal3)，增强了合并后的数据包的纠错能力。
+传输块
+发端
+Turbc
+速率
+CRC
+OFDN
+调制
+DF1
+缓存
+产生
+匹配
+调制
+TBS
+编砭速率
+调制阶数
+多径信道
+HARC重
+ACKNAN
+传控制
+CQ反馈
+信道估计
+CRC
+BEFBLER
+收端
+解速率
+OFDN
+IDFT
+均衡
+SE输出
+校验
+缓存
+匹配
+图1LTE上行链路仿真模型
+5.信道类型
+物理信道、逻辑信道、传输信道之别。这个问题不是LTE特有的，在3G中已经引入
+了RLC和MAC来承载逻辑和传输信道。至于原因有多方面的，我们知道物理信道只是最
+
+[[PAGE 15]]
+后传输的载体，但是在物理信道上传什么样的信息，以及怎样传信息是需要上层来确定
+的，因此就有了逻辑信道（传什么样的信息），以及传输信道（怎样传信息）。另外对于
+这些不同类型的信道的加密方式也是需要定义的，这就是为什么需要引入RLC层的原因。
+同理，对于传输信道的传输格式选择以及优先级队列的调度也是需要的，因此也就有了
+MAC。所以这样做的目的就是更加高效地多资源进行调度、分配和管理，尽可能提高系统
+的处理效率。
+LTE的逻辑信道，传输信道，物理信道功能介绍
+5.1逻辑信道
+介于MAC层和RLC层之间。
+逻辑信道按照消息的类别不同，将业务和信令消息进行分类，获得相应的信道称为逻
+辑信道，这种信道的定义只是逻辑上人为的定义。
+按内容本身区分,MAC通过逻辑信道为上层提供数据传送服务,MAC支持的逻辑信道：
+控制信
+缩写
+逻辑信道名
+业务信道
+广播控制信道
+BCCH
+Broadcast Control Channel
+Paging Control Channel
+呼叫控制信道
+PCCH
+CCCH
+通用控制信道
+Common Control Channel
+专用控制信道
+DCCH
+Dedicated Control Channel
+DTCH
+专用数据信道
+Dedicated Traffic Channel
+BCCH：下行广播控制信息
+PCCH：下行寻呼信息
+CCCH:在RRC连接建立前UE与网络之间的双向控制信息。
+MCCH:控制一个或者多个MTCH的控制信息,只有支持MBMS才有该信道
+DCCH:RRC连接建立后UE到网络之间的双向控制信息
+DTCH：点到点的双向业务信息.
+5.2传输信道
+介于物理层和MAC层之间。
+传输信道对应的是空中接口上不同信号的基带处理方式，根据不同的处理方式来描述
+信道的特性参数，构成了传输信道的概念，具体来说，就是信号的信道编码、选择的交织
+方式（交织周期、块内块间交织方式等）、CRC亢余校验的选择以及块的分段等过程的不
+
+[[PAGE 16]]
+同，而定义了不同类别的传输信道；简单的说就是会定义MCS，编码，等方式，也就是
+告诉物理层如何去传递这些消息。
+按怎样传，传什么特征的数据区分，物理层通过传输信道为上层提供数据传送服务。
+物理层支持的传输信道：
+下行
+缩写
+传输信道名
+上行
+Broadcast Channel 广播信道
+BCH
+下行共享信道
+DL-SCH
+Downlink Shared Channel
+呼叫信道
+PCH
+Paging Channel
+上行共享信道
+UL-SCH
+Uplink Shared Channel
+随机接入信道
+RACH
+Random Access Channel
+BCH：固定MCS，广播
+PCH:支持DRX(UE省电)，广播
+MCH：广播,支持SFN合并，支持半静态资源分配(如分配长CP顿)
+RACH：（随机接入信道）是一种上行信道，用于PAGING回答和MS主叫/登录的接入
+等。限信息，存在竞争。
+DL-SCH:下行共享信道（Downlink Shared Channel，DL-SCH）支持 HARQ,AMC,
+可以广播，可以波束赋形，可以动态或半静态资源分配，支持DTX，支持MBMS(FFS)
+UL-SCH:支持HARQ,AMC,可以波束赋形(可能不需要标准化),可以动态或半静态资源分配
+5.3物理信道
+位于物理层。
+信号在空中传输的承载。
+物理信道，就是在特定的频域与时域乃至于码域上采用特地的调制编码等方式发送数
+据的通道，物理信道就是空中接口的承载媒体，根据它所承载的上层信息的不同定义了不
+同类的物理信道。
+下行物理信道
+PCFICH:物理控制格式指示信道，指示用多少个OFDM符号来传输PDCCH.由CFI
+来指示，CFI可以取值为CFI=1,2,3,4（4保留）。PCFICH总是位于子顿的第一个OFDM
+
+[[PAGE 17]]
+符号上。其具体的位置依赖于系统的带宽和小区的物理标识PCI（Physical Cell ldentity，
+物理小区标识）。LTEPCFICH大小是2bit,其中承载的是CFI（Control Format
+Indicatior），用来指明PDCCH在子内所占用的符号个数。
+PHICH:物理HARQ指示信道，用来反馈上行HARQ接收结果,用于NodB向UE反馈
+和PUSCH相关的ACK/NAK信息。
+PDCCH:物理下行控制信道.PDCCH承载调度以及其他控制信息，具体包含传输格
+式、资源分配、上行调度许可、功率控制以及与上行传输相关的ACK/NACK
+等信息。这
+些信息可以组成多种控制信息(DCI)格式，被映射到每个子的最先的前n（n<=4）个
+OFDM符号中，n的具体取值由PCFICH信道中的CFI来指示
+PDCCH中承载的是DCI（DownlinkControl Information），包含一个或多个UE上的
+资源分配和其他的控制信息。在一个子内，可以有多个PDCCH。UE需要首先解调
+PDCCH中的DCI，然后才能够在相应的资源位置上解调属于UE自己的PDSCH（包括广
+播消息，寻呼，UE的数据等）
+PBCH:物理广播信道，用来传输MIB信息的物理广播信道，传递UE接入系统所必需
+的系统信息，如带宽，天线数目等。
+PMCH物理多播信道PMCH
+PDSCH物理下行共享信道
+UE需要先收听PCFICH信道，PCFICH信道用于描述PDCCH的控制信息的放置位置
+和数量，然后UE去接收PDCCH的信息，进而接收PDSCH的信息。
+上行物理信道
+PRACH物理随机接入信道
+（UE通过上行RACH来达到与LTE系统之间的上行接入和同步。在FDD模式下（以
+下若未特别指出，均是对FDD模式而言）PRACH的大小为6个RB，每个子中，至多有
+一个PRACH（36.211,Section5.7.1）。TDD模式下，允许一个子顿中存在多个频分的
+PRACH。)
+PUCCH物理上行控制信道PUCCH。
+PUSCH物理上行共享信道
+每个信道都有独立的频域资源，如PBCH/PSS/SSS/PCFICH/PHICH/PDCCH
+5.4 映射关系
+CCCH和DCCH映射的传输信道都是DLSCH，对应的物理层都是PDSCH，它们的
+接收过程和数据相同，都是先通过RNTI确认属于PDSCH上的数据是否属于自已，然后接
+收后上报高层并作解析。
+
+[[PAGE 18]]
+6.RS(Reference Signal)
+DL RS
+包括CRS和DRS，DRS用于BF数据的相干解调；CRS则用于非BF数据的相干解
+调及信道测量。
+CRS是Cell-specific的，在系统频带内的任一个RB上都有 CRS，通过它可以计算各种
+CQI（基于全频带的，子带的或者RB的），而DRS即UE-specific RS就是DRS只在用户
+分配到的PDSCH的RB上有，而且还是预编码的，也就是说只能计算这些RB上的CQI，
+而且还是在选定某个方向上的。因此一般DRS只做解调用，不做测量。这也是目前LTE-A
+把RS分为两类的原因（DM-RS、CSI-RS）。
+UL RS
+包括DM（Demodulation）RS（窄带）与SoundingRS（宽带）。前者用于数据
+PUCCH，PUSCH数据的相干解调，后者用于信道测量。更进一步说，DMRS是用来进
+行上行信道估计的，用来解调上行信号。SRS是用来对上行信道质量评估的，用来作为上
+行调度的参考。
+7.TDD-LTE 网络结构
+LTE的系统架构分成两部分，包括演进后的核心网EPC（MME/S-GW）和演进后的
+接入网E-UTRAN。演进后的系统仅存在分组交换域。
+EPS-EPC+E-UTRAN
+LTE是物理层的演进
+LTE提供无线接口，EPC提供核心网络
+LTE+EPC=EPS
+网络元素被分成扩充的无线接入网(Evolve-UTRAN，E-UTRAN)、核心网（Core
+Network，CN)和用户设备(UserEquipment，UE)，其中E-UTRAN负责处理所有与无线通
+信相关的功能；CN负责对语音和数据业务进行交换和路由查询，以便将业务连接到外部
+网络
+
+[[PAGE 19]]
+MMEIS-GW
+MMEIS-GW
+Mobility Management
+Serving Gateway
+S1
+MME/SGW 与 eNode B
+EPS
+的接口
+eNade B
+RNC
+E-
+Node B
+X2
+X2
+eNodeB
+UTRAN
+eNode B
+eNode B
+口eNodeB间的接口
+MME/S-GW
+MME/S-GW
+X2
+E-UTRAN
+eNB
+eNB
+()
+eNB
+MME：移动管理实体
+LTE接入网仅由演进后的节点B（evolvedNodeB）组成，提供到UE的E-UTRA控制
+面与用户面的协议终止点。
+7.1EPC 与 E-UTRAN 功能划分
+LTE分为横向三层：物理层、数据链路层、网络高层。
+物理层给高层提供数据传输服务。
+数链层(层 2)分为 MAC子层，RLC(Radio Link Control)子层，PDCP子层。PDCP Packet
+data converge protocol（分组数据汇聚协议）
+网络高层即RRC层。
+
+[[PAGE 20]]
+eNB
+InterCellRRM
+RB Control
+Connection Mobility Cont.
+RadioAdmissionControl
+eNBMeasurement
+MME
+Configuration&Provision
+NAS Security
+DynamicResource
+Allocation (Scheduler)
+Idle State Mobility
+Handling
+RRC
+PDCP
+SAEBearerControl
+RLC
+Serving Gateway
+MAC
+S1
+Mobility Anchoring
+PHY
+internet
+E-UTRAN
+EPC
+eNB功能：
+eNB之间采用IP传输。
+1）无线资源管理相关的功能，包括无线承载控制、接纳控制、连接移
+动性管理、上/下行动态资源分配/调度等；
+2）IP头压缩与用户数据流加密；
+3)
+UE附着时的MME选择;
+4)
+提供到S-GW的用户面数据的路由；
+5)
+寻呼消息的调度与传输；
+6)
+系统广播信息的调度与传输；
+7)
+测量与测量报告的配置。
+MME（移动管理实体）功能：
+寻呼消息分发，MME负责将寻呼消息按照一定的原则分发到相关的
+eNB;
+2)
+安全控制;
+3)
+空闲状态的移动性管理；
+SAE承载控制；
+
+[[PAGE 21]]
+5）非接入层信令的加密与完整性保护。
+服务网关功能：
+1）终止由于寻呼原因产生的用户平面数据包；
+2）支持由于UE移动性产生的用户平面切换。
+7.2E-UTRAN接口的通用协议模型
+E-UTRAN接口的通用协议模型如下图所示，适用于E-UTRAN相关的所有接口，
+即S1和X2接口。E-UTRAN接口的通用协议模型继承了UTRAN接口的定义原则，即控
+制面和用户面相分离，无线网络层与传输网络层相分离。继续保持控制平面与用户平面、
+无线网络层与传输网络层技术的独立演进，同时减少了LTE系统接口标准化工作的代价。
+Radio
+Control Plane
+User Plane
+Network
+Layer
+Application
+Protocol
+Transport
+Network
+Transport
+Transport
+Network
+Network
+User
+User
+Plane
+Plane
+Layer
+Signalling
+Data
+Bearer(s)
+Bearer(s)
+Physical Layer
+7.3OSI七层模型
+OSI模型有7层结构，每层都可以有几个子层。OSI的7层从上到下分别是：
+7应用层
+6表示层
+5会话层
+4传输层（段，segment)
+TCP和UDP都是传输层的协议，TCP和UDP都在网络层协议（如IP）的基础上工作
+地。比如TCP向下封装在IP包里面。
+3网络层（包，packed)
+IP是网络层的协议
+
+[[PAGE 22]]
+2数据链路层(帧，frame)
+IEEE802系列标准把数据链路层分成LLC（LogicalLinkControl，逻辑链路控制）
+和MAC（MediaAccessControl，媒介接入控制）两个子层。
+1物理层（比特，bit）
+数据发送时，从第七层传到第一层，接受方则相反。
+其中高层，既7、6、5层定义了应用程序的功能，称为应用层，下面4层，既4、3、
+2、1层主要面向通过网络的端到端的数据流。数据在发至数据流层的时候将被拆分。
+8.层映射和预编码
+CFI
+加扰
+信道编码
+调制映射
+层映射
+预编码
+RE映射
+OFDM符号产生
+层映射原理示意
+-Antennamapping
+Maximum of
+Up to N, layers
+two codewords
+Na antennas
+Layer
+Pre-
+mapping
+coding
+V2
+空间复用时的层映射举例一2:3
+
+[[PAGE 23]]
+空间复用方式时2:3模式层映射
+d(%(i)
+x(()
+码字流0
+层0
+d[(2i)_ 三x(℃)
+x(()
+串转并
+d((i)
+层1
+d(2i+1)= x(2()
+x(2)(i)
+码字流1
+层2
+预编码原理示意
+数据流1
+天线1
+天线1
+V21
+数据流1
++V31
+空间子信道1
+天线2
+天线2
+增益为
+数据流2
+天线3
+天线3
+1122
+空间子信道2
+数据流2
+增益为 
+U32
+N42
+天线4
+天线4
+层映射（layermapping）和预编码（precoding）共同组成了LTE的MIMO部分。
+层映射是把码字（codeword）映射到层（layer），这样原本的串行数据流就有了空
+间的概念，将码字映射到并行的数据流上，层数就是可并行传输的数据流个数，一般来说
+小于等于信道矩阵的秩，唯一例外的是发分集，层数就是天线的逻辑端口个数。很多
+MIMO的书籍都提到过，其原理类似解线性方程组，每层上的符号就是待解的未知数。
+预编码是把数据由层映射到天线端口，所以预编码又可以看做是天线端口映射。预
+编码：为了使上面的方程组在求解的时候具有更好的精度（反映在通信系统就是误码
+率），可以利用矩阵原理中的一些算法，对线性方程组系数进行处理，反映出来就是预编
+码。预编码：把一个编码阵（天线端口数*层数)乘以并行的多个数据流，从而把所有数据
+流映射到天线端口上；唯一例外的也是发分集，是硬分配的。
+码字可以有1路也可以有两路，层可以有1，2，3，4层，天线端口可以有1个，2个
+和4个。当层数是3的时候，映射到4个天线端口，不存在3个天线端口的情况。
+codeword最大只能取2
+
+[[PAGE 24]]
+天线端口的概念，是一种导频（图谱），“antenna port defined by the presence of an
+antennaportspecific reference signal"。LTE最大支持基站4根天线，6个天线端
+口 (p={0,1,2,3,4,5)),
+其中p=(0,1,2,3)表示的是小区专用导频（cell-specific），分别对应4根发送天线，一
+般情况下，每个天线使用其中的一个导频图谱，也就是一个天线端口。
+p=4时表示的是MBSFN参考信号，与MBSFN传输相关联。MBSFN应该是指多媒体
+广播单频网 Multicast/Broadcast over Single Frequency Network。
+p=5表示的是用户终端专用导频，（UE-specific），是用来做beamforming专用的。
+天线端口指用于传输的逻辑端口，与物理天线不存在定义上的一一对应关系。天线端
+口由用于该天线的参考信号来定义。
+9.LTE中 PDSCH的资源分配
+多天线资源栅格
+由于LTE引入了多天线技术，每根天线上传输的资源栅格具有一定相似性，但是由于
+它们对应的天线端口往往是不一样的，因此它们的资源栅格也会不一样，这主要表现在不
+同的参考信号的分布上，下图为多天线端口情况下的资源栅格示意图1.2：
+
+[[PAGE 25]]
+一个无线领10ms
+72子被（5FB）
+一个子赖（2个时肿）
+两个空问层
+12千数被
+一个资源起子
+空信号
+1资源块
+上图红色方块为参考信号所处位置，而灰色的方块为空信号。参考信号是为了让用户
+对信号质量进行测量以及信道估计所用，因此对于多天线端口的情况，在某一天线端口上
+存在参考信号的话，那么对应的另外的天线端口相应的位置就不能够传任何信号，以避免
+对参考信号造成干扰。
+PRB：0.5mS，12个子载波，7个OFDM符号（前两个传控制信令，后五个传数据）
+注：当使用常规CP时，一个下行时隙包含7个OFDM符号；当使
+用扩展CP时，一个下行时隙包含6个OFDM符号。
+PRB是基站调度器进行资源分配的最小单元。
+RE：资源单元，对于多天线应用，每个发射天线都会对应一个RE，同一个RE可以被
+多个发射天线复用。
+
+[[PAGE 26]]
+Onedownlink slot Tslt
+OFDM symbols
+k- NNP-1
+Resource block
+resource clements
+subcarricrs
+NRB subcarriers
+Resourceelement (ic,D)
+k-0
+1=0
+I = NDL,
+spb -1
+物理层是基于资源块以带宽不可知的方式进行定义的，从而允许LTE物理层适用于
+不同的频谱分配。一个资源块在频域上或者占用12个带宽为15KHz的子载波，或者占
+用24个宽度为7.5KHz的子载波，在时域上持续时间为0.5ms。
+在每个无线帧中，又引入RE（ResourceElement）的概念，通过上层调度进行资源
+分配，同时将数据映射到相应的RE上并通过无线帧传输将数据和控制信令发出。
+资源单元RE对应频域上一个载波，时域上一个时隙（0.5ms）的资源。
+每个业务时隙长为0.5ms，包含7/8个OFDM符号。
+
+[[PAGE 27]]
+物理资源块PRB对应的是频域上12个连续的载波（在15K载波间隔的情况下是
+180K），时域上是一个时隙（半个子帧，0.5ms）的资源。
+虚拟资源块VRB是资源分配的基本单位，其大小与PRB相同，分为集中式和分布式
+两种。前者，VRB和PRB是相同的，可以认为VRB就是PRB。对于后者，分布式的
+VRB，其与PRB的对应关系将在后面介绍。
+在资源分配时，同一个子内两个时系上的VRB是成对分配的，尽管是用一个VRB
+号来表示的。
+PDCCH中有一个资源分配域，定义了相应的PDSCH使用的VRB（PRB）资源。
+PDSCH的资源分配类型有0，1和2三种。每一个PDCCH中的资源分配域包括两部分，
+即一个类型域以及包含真正资源分配的信息。UE根据检测到的DCI（DownlinkControl
+Information）格式对于PDCCH中的资源分配域进行解释。DCI格式1，2，2A和2B中资
+源分配域具有类型0和类型1两种方式，其资源分配信息部分具有相同的格式，使用类型
+域进行区分（0代表类型0而1代表类型1），对于带宽小于或者等于10个PRB的系统，
+总是使用类型0的资源分配，在每一个PDCCH中的资源分配域也只包含真正资源分配信
+息。具有DCI格式1A，1B，1C和1D的PDCCH使用类型2的资源分配，与类型0或者类
+型1资源分配的PDCCH资源分配格式不同。具有类型2资源分配的PDCCH没有类型域。
+(36.213 Section 7.1.6, 36.212 Section 5.3)
+类型0的资源分配中，分配给UE的资源由位图（bitmap）来表示，其中位图中的每一
+位代表一个资源块组（RBG），置1表示相应的资源块分配给了此UE，0则表示未分
+配。资源块组RBG是由一个或多个连续的VRB组成，VRB是集中类型的，RBG的大小P
+（包含的RB数目）与系统带宽有关，如下表所示：
+System
+RBG
+Bandwidth
+Size
+(d)
+≤10
+11 - 26
+27 - 63
+64 - 110
+那么在系统带宽为下RBG的数目（也就是资源位图的bit数）为，其中最后一个
+RBG的大小可能小于P。同RB的编号一样，RBG的编号也是从最低的频率开始的。
+在类型1的资源分配中，与类型0相同，资源块同样划分为大小为P（与系统带宽有
+关）的资源块组，数目为。不同的是，个资源块组被分为P个子集，其中RBG子集m是
+资源位图来表示可用的VRB/PRB（注意是RB而非RBG）。在类型1的资源分配中，同样
+用由个bit组成的位图（位数与类型0相同）来表示PDSCH的资源分配。其中，前位用来
+指示分配的PRB所处的RBG的子集。接下来的一个Bit用来表示资源分配位图是左对齐还
+是右对齐的。置位1表示是右对齐的，反之是左对齐的。剩下的位用来表示在所选择的
+RBG组中，VRB的分配位图。同样，1表示对应的VRB（也就是PRB）被分配，0则表示
+未被分配。由于在一个RBG中，用来表示RB的位图只有位，在P>1的情况下无法覆盖
+RBG中所有的RB，因此才引入了1个Bit的对齐位，置O时表示位图的MSB（也就是最
+左边）对应RBG子集中编号最小的RB（再次注意，是RB而非RBG），也就是左对齐，
+
+[[PAGE 28]]
+此时位图的LSB（也就是最右边）并不对应RBG子集中编号最大的RB。对齐Bit置1时
+表示位图的LSB对应RBG子集中编号最大的RB，也就是右对齐。
+对比类型0和类型1的资源分配方式，可以看出：类型0是以RBG为单位进行分配
+的。比较简单，但对于小数据量的业务，容易造成资源浪费。类型1是以RB为单位，资
+源分配相对灵活，可以获得更好的频率分集增益。但类型分配1每次最多只能分配一个
+RBG子集中的部分RB。
+资源分配类型2中，可以采用集中式的资源分配方式，也可采用分布式的资源分配方
+式。在PDCCH的DCI类型1A，1B和1D中，使用1个Bit的标志位来表示使用集中类型
+的VRB还是分布类型的VRB，0表示是集中型而1表示是分布型。DCI格式为1C的
+PDCCH中，总是使用分布形式的VRB。
+10.TDD LTE 和 FDD LTE 的区别
+FDD是在分离的两个对称频率信道上进行接收和发送，用保护频段来分离接收和发送
+信道。FDD必须采用成对的频率，依靠频率来区分上下行链路，其单方向的资源在时间上
+是连续的。FDD在支持对称业务时，能充分利用上下行的频谱，但在支持非对称业务时，
+频谱利用率将大大降低。
+TDD用时间来分离接收和发送信道。在TDD方式的移动通信系统中，接收和发送使用
+同一频率载波的不同时隙作为信道的承载，其单方向的资源在时间上是不连续的，时间资源
+在两个方向上进行了分配。某个时间段由基站发送信号给移动台，另外的时间由移动台发
+送信号给基站，基站和移动台之间必须协同一致才能顺利工作。
+由于TDD顿结构与FDD顿结构不同，TD-LTE系统具有
+一些特有技术
+(1)
+上下行配比
+LTETDD中支持不同的上下行时间配比，上下行时间比不总是“1:1”（见表1），可以
+根据不同的业务类型，调整上下行时间配比，以满足上下行非对称的业务需求。
+表1：不同顿周期的上下行配比
+周期?
+上下行配比?
+5mst
+1DL:3UL,2DL:2UL,3DL:1UL
+10mst
+6DL:3UL,7DL:2UL,8DL:1UL,3DL:5UL
+（2）特殊时隙的应用
+为了节省网络开销，TD-LTE允许利用特殊时隙DwPTS和UpPTS传输系统控制信
+息。I
+LTEFDD中用普通数据子顿传输上行 sounding导频，而TDD系统中，上行 sounding
+导频可以在 UpPTS 上发送。另外，DwPTS也可用于传输 PCFICH、PDCCH、PHICH、
+PDSCH和P-SCH（主同步信号）等控制信道和控制信息。其中，DwPTS时隙中下行控制
+信道的最大长度为两个符号，且主同步信道固定位于DwPTS的第三个符号。
+（3）多子顿调度/反馈
+
+[[PAGE 29]]
+和FDD不同，TDD系统不总是存在1:1的上下行比例。当下行多于上行时，存在一个
+上行子帧反馈多个下行子帧，TD-LTE提出的解决方案有：multi-ACK/NAK，ACK/NAK捆
+绑（bundling）等。当上行子顿多于下行子时，存在一个下行子帧调度多个上行子顿
+（多子帧调度）的情况。
+（4）同步信号设计
+除了TDD固有的特性之外（上下行转换、特殊时隙等），TDD顿结构与FDD顿结构
+的主要区别在于同步信号的设计。LTE同步信号的周期是5mS，分为主同步信号（PSS）
+和辅同步信号（SSS）。LTETDD和FDD顿结构中，同步信号的位置/相对位置不同，如
+图3所示。在 TDD顿结构中，PSS 位于DwPTS 的第三个符号，SSS位于5ms第一个子顿
+的最后一个符号；在FDD顿结构中，主同步信号和辅同步信号位于5ms第一个子帧内前
+一个时隙的最后两个符号。利用主、辅同步信号相对位置的不同，终端可以在小区搜索的
+初始阶段识别系统是TDD还是FDD。
+Subframe #0
+FDD
+TS#O
+TS#I
+Subframe #!
+Subframc#2
+O sss
+I pss
+UpPTS
+DwPTS
+DL
+TDD
+GP
+Subframe ()
+Subfrane#2
+0 sss
+pss
+RSiContorl dala
+图3：FDD和TDD的同步信号设计
+（5）HARQ的设计
+LTEFDD 系统中，HARQ的 RTT（Round Trip Time）固定为8mS，且 ACK/NACK 位
+置固定，如图4所示。TD-LTE系统中HARQ的设计原理与LTEFDD相同，但是实现过程
+却比LTEFDD复杂，由于TDD上下行链路在时间上是不连续的，UE发送ACK/NACK的
+位置不固定，而且同一种上下行配置的HARQ的RTT长度都有可能不一样，这样增加了
+信令交互的过程和设备的复杂度。
+如图4所示，LTEFDD系统中，UE发送数据后，经过3ms的处理时间，系统发送
+ACK/NACK，UE再经过3ms的处理时间确认，此后，一个完整的HARQ处理过程结束，
+整个过程耗费8mS。在LTETDD系统中，UE发送数据，3ms处理时间后，系统本来应该
+发送ACK/NACK，但是经过3ms处理时间的时隙为上行，必须等到下行才能发送
+ACK/NACK。系统发送ACK/NACK后，UE再经过3ms处理时间确认，整个HARQ处理
+过程耗费11mS。类似的道理，UE如果在第2个时隙发送数据，同样，系统必须等到DL
+时隙时才能发送ACK/NACK，此时，HARQ的一个处理过程耗费1OmS。可见，LTETDD
+系统HARQ的过程复杂，处理时间长度不固定，发送ACK/NACK的时隙也不固定，给系
+统的设计增加了难度。
+
+[[PAGE 30]]
+HARQRuuni Trip Tirm ms
+PrecssNuinbci-R
+Data&CF
+ACK
+FDD
+Da&F
+INexle: Ts
+NACK
+Nole F3
+prexcess lime
+pnucess time
+Reund Trnip Tin: Ilens
+TDD
+DL
+DL
+UL
+DL
+UL
+DL
+13UL :2DL
+UL
+ACK
+NACK
+KTT-I0ms
+DL
+DL
+NACK
+图4：FDD和TDD的HARQ设计
+与FDD模式一样，在LTETDD模式中支持VoIP面临着诸多挑战，主要包括：时延
+要求严格，HARQRTT较长；不同上行链路/下行链路配置方案中的各种控制信道限制条
+件；由不连续传输导致的严重上行链路覆盖范围问题，由于存在多个可能的上行链路/下行
+链路配置方案，它可用于实现高的VoIP总容量。
+我们给出当系统带宽为5MHz时，LTETDD模式中的VoIP系统级性能。容量估计标
+准与FDD相同，它可定义为当中断概率不超过5%时，每个扇区VoIP支持的用户最大
+数。VoIP容量数可以从宏蜂窝场景1和宏蜂窝场景3中的系统仿真结果中得到。
+11.调度器
+参考文献：
+1. Adaptive Fairness Control for a Proportional Fair LTE
+Scheduler
+2. Sensitivity Analysis of the Optimal ParameterSettings of an
+LTE Packet Scheduler
+
+[[PAGE 31]]
+3. Fairness Improvement of Maximum C/I Schedulerby Dumb
+Antennas in Slow Fading Channel
+4. Scheduling Techniques Evaluation in LTE systemswith
+Mixed Data Traffic
+5. An improved downlink scheduling algorithm for VOIP
+traffic in IEEE 802.16
+6.Dynamic Packet Scheduling for Traffic Mixes ofBest Effort
+and VoIP Users in E-UTRAN Downlink
+7. Downlink Packet Scheduling for Real-Time Traffic in
+Multi-User OFDMA System
+8. An Efficient Downlink Packet Scheduling Algorithm in
+LTE-Advanced Systems with Carrier Aggregation
+9. Virtually Dedicated Resource Allocation for VoIPTraffic in
+the Downlink Mobile WiMAX SystemWith Hybrid ARQ
+10. Fair Resource Allocation for Inband Relaying inLTE-
+Advanced
+11. Performance of WiMAX Packet Schedulers forMulti-
+Class Traffic
+12. Packet Scheduling and Fairness forMultiuser MIMO
+
+[[PAGE 32]]
+systems
+13. Performance Analysis of Two Packet Scheduling
+Algorithms in Downlink 3GPP LTE System
+14. Resource Allocation and Scheduling InMIMO-OFDMA
+with Time-Varying Channel andBursty Arrivals
+15. A Packet Scheduling Scheme to SupportReal-Time Traffic
+in OFDMA Systems
+16. Packet scheduling for real-time traffic for
+multiuserdownlink MIMO-OFDMA systems
+17. Performance Analysis of Persistent Scheduling for VoIP in
+WiMAX Networks
+18. VoIP Traffic Scheduling in WiMAX Networks
+19. MAC Scheduling Scheme for VoIP Traffic Service in 3G
+LTE
+20. Scheduling and Link Adaptations for VoIP in TDD-LTE
+Uplink
+21. Efficient Semi-Persistent Scheduling for VoIP on EUTRA
+Downlink
+22. Semi-Persistent Scheduling for VoIP Service in the LTE-
+
+[[PAGE 33]]
+Advanced Relaying Networks
+23. Group Scheduling for Improving VoIP Capacity in IEEE
+802.16e Netw0rks
+24. Principle and Performance of Semi-Persistent Scheduling
+for VoIP in LTE System
+25. Utility-Based Uplink Scheduling Algorithm for Enhancing
+Throughput and Fairness in Relayed LTE Networks
+26. Semi-persistent scheduling for VoIP service in the LTE-
+Advanced relaying networks
+调度时应主要基于信道条件，同时考虑等待发射的数据量以及业务的优先等级等情况，并
+充分发挥自适应调制编码(AMC)和混合重传机(HARQ)的能力
+性能的监测方而儿乎也是独立的，因此设计时，尽量能够独立，但是如果采用TD-LTE的制式，能够结合
+上下行结合起来调度呢？我想这是应该做的，比如上行调度，完全可以参考下行反馈的信道质量，乃至于
+空间复用方式选择上；
+调度器是实现快速分组调度技术的功能实体，它是LTE系统eNB侧MAC层的核心功
+能，对系统性能有重大影响，决定哪些用户得到调度，以及这些用户的时频资源、调制编
+码方案(MCS，Modulation andCoding Scheme)、MIMO等，它分为上行调度器和下行调度
+器，分别负责给上行共享传输信道UL：SCH和下行共享传输信道DL一SCH分配物理层资
+源。物理层资源主要包括物理资源块(PRB)和调制编码方案(MCS)，多天线情况下还包括天
+线选择方案。调度器在LTE协议中的位置，以及它和HARQ、AMC等关键技术的实现关
+系如图2．5所示。其功能是判决在什么时间分配给哪些用户什么样的无线资源(如频率、
+时间、调制编码方案和天线等)来进行通信。这种判决是以最大化系统吞吐量为目标，以保
+证用户间的公平性为前提，以确保不同业务流服务质量要求为基础的。3GPPRelease5以前
+的版本一般将无线分组调度功能放在RNC上进行，借鉴了计算机网络的做澍51。但对无
+线网络有其自身的特点(或者说QoS要求)，如信道的快速时变特性，将调度器放罱在RNC
+侧就不钱很好地、自适应地、迅速地反映当前时变信道的传输信息，从而无法进行快速的
+链路自适应和快速调度，所以在LTE系统中把调度器放置在基站侧进行控制，这样调度器
+
+[[PAGE 34]]
+可以及时地根据信道情况和衰落特性自适应改变调制方式或其他传输参数，同时减少用户
+设备(UE)的内存要求和系统的传输延迟。
+数据包
+MAC层
+RLC队列
+RLC
+调度器
+RRC
+HARQ
+物理层
+资源块调度2
+AC
+天线喷射
+图 2-5 
+调度器在LTE协议中的位置
+调度器进行调度需要知道以下信息：
+1)可用时频资源(含可用PRB、小区负载、功率、干扰协调等信息)
+2)用户的QoS参数(各个业务的类别、优先级、GB刚MB肿B洲BR等)
+3)BufferStatus(区分不同优先级组)
+4)空口质量(如不同频带的CQI /CPI等)
+5)UEn一P.力(例如HOM能力、MIMO能力、内存大小、处理能力等)
+6)HARQ信息(如HARQ重传信息、persistent scheduling等)
+调度器的输出：
+1）调度用户的上下行时频资源分配（资源分配)：UE标识、分配的资源位置和分配时
+2)调度用户的上下行MCS／MIMO信息（传输格式）：多天线信息、调制方式和负载
+大小
+3)调度用户的HARQ参数：的内容视HARQ的类型有所不同，异步HARQ信令包括
+HARQ流程编号、增量穴余(IR)、HARQ的穴余版本和新数据指示等，同步HARQ信令包
+括重传序列号。
+在采用多天线的情况下，资源分配信息和传输格式可能需要对多个天线分别进行传
+送。
+
+[[PAGE 35]]
+调度器进行多业务调度时应该考虑每个用户设备和相应的无线承载的业务量及QoS要
+求，当一个用户存在多种业务，即多个无线承载时，上行调度器应采取“每用户”的调度
+分配原则，即每次调度时调度器给一个用户只发一个调度命令，多业务间的资源分配或者
+按照事先默认的原则进行分配或者由用户决定，即UE侧需要进行二次调度。考虑调度准
+许信令和HARQ的因素，“每承载"的调度分配原则，即每个承载发一个调度命令的方式
+在LTE系统中不予采用。
+上的数据经过调度模块最终复用成一个TB(TransportBlock)块。在没有MIMO的情况下，
+每个用户每个TT1只能发一个TB块。只能发送一个TB块意味着当调度算法分配给同一个
+用户多个RB块时，需要针对该用户的信道质量在多个RB块上进行合并，给出统一的调制
+编码方式。
+无线承载
+ROHC
+ROHC
+ROHC
+ROHC
+PDCP
+Security
+Security
+Security
+Security
+Segm.
+Segm.
+Segm.
+Segm.
+RLC
+ARQ
+ARO
+ARO
+ARQ
+BCCH
+PCCH
+逻辑信避
+调度/优先级计算
+MAC
+Multiplexing UE,
+Multiplexing UE,
+HARQ
+HARQ
+传输信达
+图2-4下行MAC层的结构
+半静态调度Semi-Persistent Scheduling
+VoIP（VoiceOverIP）、视频流
+包大小比较固定，到达时间间隔满足一定规律的实时性业务
+
+[[PAGE 36]]
+半静态调度方式是指在LTE的调度传输过程中，eNB在初始调度通过PDCCH指示
+UE当前的调度信息，UE识别是半静态调度，则保存当前的调度信息，每隔固定的周期在
+相同的时频资源位置上进行该业务数据的发送或接收。容易理解，使用半静态调度传输，
+可以充分利用话音数据包周期性到达的特点，一次授权，周期使用，可以有效的节省LTE
+系统用于调度指示的PDCCH资源
+以典型的VoIP业务举例，其数据包到达周期为2OmS，则eNB只要通过PDCCH给
+UE半静态调度指示，UE即按照PDCCH的指示进行本次调度数据的传输或者接收，并且
+在每隔20ms之后，在相同的时频资源位置上进行新到达的VoIP数据包的传输或者接收。
+如图2所示，标记为绿色的资源即为UE周期进行发送或者接收的资源位置。
+半静态调度
+20ms
+20ms
+时间
+图2半静态调度资源使用示意图
+对于半静态调度传输，主要有三个关键的步骤，即半静态调度传输的激活，半静态调
+度传输的HARQ过程以及半静态调度传输资源的释放。
+3.4.4.2半静态调度（SPS）
+半静态调度跟WIMAX系统的UGS相似，由于这些资源主要是分配那些需要周期性
+调度的业务，比如VoIP，既然是周期性需要的，那么为何不采用事先配置来做呢？这样就
+可以减少PDCCH的资源，要知道在LTEPDCCH的资源是非常宝贵，上下行共用的；而
+且如果不发自然也相应的减少了空口资源的使用。
+当通过RRC消息激活SPS调度，则需要提供以下信息，（可以查36.331来获得这些
+参数的具体描述与定义）：
+SPS C-RNTI
+
+[[PAGE 37]]
+上行调度间隔semiPersistSchedlntervalUL与隐含指示多少个空传之后释放
+连接参数implicitReleaseAfter;
+，下行调度间隔semiPersistSchedlntervalDL以及多少个HARQ进程用于半静
+态调度numberOfConfSPS-Processes;
+如果RRC去激活上行或者下行连接，那么相应的配置授权与配置的资源要丢弃。
+3.4.4.2.1 下行
+当下行SPS资源分配配置好以后，在每一个子顿，UE通过计算下面的公式来判断
+是不是在这个子顿有这个资源分配：
+* N+( essns + sn esNS * O)) =(aeins + NS  O)
+semiPersistSchedIntervalDL] modulo 10240, N > 0
+其中SFN start time和 subframe star time是配置资源分配的起始SFN与起始子顿，这两个值
+的设置可以在初始化或者重配的时候告诉UE的。
+3.4.4.2.2 上行
+当上行SPS授权（Grant）配置好，则UE认为在满足下式的子帧都会存在这个授
+权：
+* N + (n eseiins + sn esN * O)) = (aeins + NS * O)
+semiPersistSchedlntervalUL + Subframe_Offset * (N modulo 2)] modulo 10240, N>0 
+其中SFNstart time和subframestartime是配置资源分配的起始SFN与起始子，这两个值
+的设置可以在初始化或者重配的时候告诉UE的。
+
+[[PAGE 38]]
+UE在经过连续implicitReleaseAfter次在SPS分配的资源上空传（MACPDU不包含任
+何MACSDU）后就要清掉这个配置好的上行授权。
+注：在清掉配置的上行授权后，还可以继续发送SPS的重传，当然这个资源就要按照
+通常的调度来获得了。
+三、LTE 语音仿真平台
+我们把整个无线系统的IP语音质量仿真分为链路级仿真、系统级仿真和VoIP语音质
+量仿真三部分分开进行，每一级仿真为下一级仿真提供统计结果，如图所示。
+Eb/NO~BER/FEA
+分组丢失！
+语音质里
+路级仿真
+系统级仿真
+性能春数
+性能参针
+仿真
+图1移动通讯系统的VoIP语音质量的仿真框架
+1.链路级仿真
+链路级仿真是通过对物理层和链路层传输的建模，输出错误概率和信干噪比
+（SINR）的关系。通常采用的错误概率为BER（误比特率）或BLER（误块率）或FER
+（误顿率）。一个好的链路级性能是达到好的系统级性能的必要条件但并不是充分条件。
+
+[[PAGE 39]]
+表2：链路级仿真参数
+数+
+下行信道带宽
+10MHz+
+载波频率。
+2GHz
+FFT尺寸+
+1024
+可用子载波数目?
+6004
+簇数目
+每族包含的子载波数目
+12
+相邻子载波空间
+15KH2
+采样频率?
+15.36MHz
+子顿长度
+1ms
+OFDM符号长度+
+71.43us+
+每个子顿包含的符号数
+14h
+1.1主要模块功能
+Codec模块。该模块对数据进行信道编码，编码模块不仅实现了检错纠错功能，而且
+还包含有交织、速率匹配和信道映射等功能。LTE的信道编码模块主要可以分为以下几个
+子模块，程序严格按照R8协议依照子模块的次序进行编写。
+Scheduler模块。属于频域资源调度模块，其主要内容是进行（
+CQI计算，并为UE选择
+适当的RB传输方案，包括rank，MCS，TBS，RBG等。在测量CQI时，以几个RBG为单
+位，一般选取为5，不同的RBG组内的反馈信息是不同的。在计算预编码矩阵时考虑了基
+于码本和非基于码本两种方式。
+LTE调度器调度时对资源的分辨是一个子顿中两个时隙的两个资源单元，而不是以资
+源单元为单位
+MIMO模块。把调制后的符号映射为每根天线发送所需要的信号。MIMO模块的实
+现流程是，先进行层映射然后进行预编码处理。层映射是通过子函数layer_mapping.m
+实现的，预编码处理可以选择基于码本的和非基于码本的，对于非基于码本的，用求的的
+预编码矩阵相乘层映射后的矩阵即可，对于基于码本的情况，根据求的的预编码索引矩阵
+从已经存在的码本中查询到相应的预编码矢量即可。
+
+[[PAGE 40]]
+Resourcemapping and de-mapping模块。资源映射模块，即把预编码后的信号映射
+到时频资源块上，条
+然后做Ifft，加上循环前缀后得到每根天线的发射序列。而逆映射模块即
+是上述的逆过程，即将得到的接收序列依次去循环前缀，做ft变换。
+Channel模块。
+Rx-detector模块。该模块实现在使用多天线的情况下，通过接收天线接收到得信息
+序列，通过MMSE或者MRC算法得到每根接收天线对应的信息序列。在秩为1时，采用
+MRC算法，当秩>1时，采用MMSE算法
+信道估计模块的主要作用是在接收端对信道进行估计，并得到估计信道矩阵，模块中
+的信道估计分理想信道估计和非理想信道估计，理想信道估计是假设在接收端信道已知，
+非理想信道估计则采用了基于维纳滤波的MMSE准则估计算法。
+HARQ模块
+
+[[PAGE 41]]
+1.2链路级仿真流程图
+Simulator parameters configuration:+
+Frame structure, channel model, antenna configuration,
+MiMo transmission models, resource mapping configuration,
+HARQ, channel state measurement configuration+
+Transmittedsignalsgeneration:
+Schedules:
+MCS, PMI+'
+Channel coding, modulation, sequence
+MCs selection, PRB assignment,
+generation, MIMo pre-coding and layer
+HARQ
+mapping (in one sub-frame)+
+PRB+
+Signal in one sub-frame+
+Resource mapping:
+Time/Frequency resource mapping, IFFT, add Cp
+(PDSCH, CRS, DMRS)+"
+PRB+
+Channel Model:
+Fast fading, SCM,AWGN
+Resource de-mapping:-
+CQI/PMI/Rank+
+CRS/DMRS+"
+PDSCH
+MCSt
+Channel statemeasurement:
+Ch matrix+
+Detector:+
+Ch. Response matrix estimation,
+Data signal: detection, demodulation+
+CQi/PMI (pre-coding vector)/Rank
+measurement
+DecoderandCRCdecision+
+AcK/nacK+*
+ACK+
+Performancestatistic:
+BLER or throughput+
+链路级仿真流程图
+
+[[PAGE 42]]
+2.链路到系统级的映射
+系统级仿真的难点之一是如何获得所有终端和基站/接入点之间的无线链路性能，对每
+条链路都进行链路级仿真的复杂度和耗时都是巨大的，因而不切实际。通常的做法是建立
+L-S接口，如图5.1所示。通过链路级仿真，预先建立各种调制编码方案（MCS）在
+AWGN信道下的误码率性能查找表，根据LEP模型预测能力的不同，查找表建立时要考虑
+到调制模式、编码方式、码长、码率和信道类型等因素中的某一些或全部。在系统级仿真
+时，链路测量模型考虑大、小尺度衰落、路径损耗、阴影衰落、小区间干扰、功率分配、
+无线资源分配和收发机预处理和后处理等多种因素后，计算出链路当前的SINR值（标量
+或矢量），L-S接口按照系统的特点将该SINR值映射为一个有效SINR值（标量），再由
+有效SINR值查找链路级查找表，得到BER、BLER等链路级性能指标，然后将它们作为
+链路当前SINR值对应的误码率反馈给系统级仿真器，这样大大降低了系统级仿真的复杂
+度。
+系统级仿真器
+大、小尺度衰落
+功率分配
+路径损耗
+无线资源分配
+阴影衰落
+收发机预处理
+模型
+小区间干扰
+收发机后处理
+瞬时 SINR
+瞬时误码率
+L2S接口：链路差错预测模型
+瞬时SINR映射为有效SINR
+有效SINR
+误码率
+链路级仿真器
+调制模式、编码方式、码长、码率、信道类型
+图5.1链路级到系统级的接口
+从链路当前SINR到有效SINR的映射是L-S接口精确性的决定性因素。对于传统的单
+载波系统来说，链路当前SINR是一个标量，有效SINR映射是其它信道类型到AWGN信
+道的SINR等效过程。对于以多载波和多天线传输为重要特点的B3G/4G系统而言，瞬时
+SINR是一个向量，要通过有效SINR映射将其压缩映射为一个标量，增加了有效 SINR映
+射的难度。
+OFDM系统的性能分析主要采用两种链路到系统级映射方法：指数有效信噪比映
+射(EESM)和互信息有效信噪比映射(MI-ESM)。EESM是一种非常简单且易于实现的方法，
+当使用它的时候，一个终端的所有子载波都必须使用相同的调制和编码方式；而MI-ESM
+
+[[PAGE 43]]
+是一种更高级的映射方法,它不会要求一个终端的所有子载波都使用相同的编码调制方式。
+这两种方法都是基于有效信噪比映射（ESM）的思想,目的是要找到一个压缩函数把一组
+不同的SINR序列映射成一个单一的有效SINR值,然后通过这个值就能够查表得到BLER
+值。二者的主要差别是使用的信息测度函数不一样。
+有效SINR映射（ESM）的基本原理是将多个OFDM子载波的SINR值y映射成
+一个有效的 SINR值eff ，然后用这个有效的SINR值从一条基本的AWGN链路级性能
+曲线上查找到BLER的估计值。目前在3GLTE的研究中主要使用的是EESM映射方法
+3.系统级仿真平台
+系统级仿真基于链路级仿真，可分为静态仿真和动态仿真2类。静态仿真的原理是采
+用蒙特卡罗（MonteCarlo）方法：在特定配置下，静态仿真产生不同的场景（快照）并
+通过迭代过程达到稳定状态。通过获得足够多次的快照可获得系统平均性能。在静态仿真
+中时间是固定的，因此仿真速度较快，仿真也比较容易。静态仿真不能仿真RRM算法，
+因为这些算法都是与时间相关的。动态仿真更适合于模拟真实系统的运行，比静态仿真更
+加准确但更复杂，同时也需要更多的时间搭建及运行。在动态系统级仿真中，网络元素（包
+括传播环境）和算法都必须按照其功能和要求建模。系统级性能与很多因素有关，例如系
+统结构、参数选择、用户特性和业务特性等。RRM（无线资源管理）算法也对系统级性能
+起着至关重要的作用，例如接入控制、功率控制、资源分配算法和切换策略等。
+的LTE系统级仿真平台。仿真器包括多小区建立，用户移动模型，Wrap-around，链路
+级映射，信道衰落模型，AMC，HARQ，分组调度等部分。该平台采用连续的时间驱动
+的动态仿真机制，按照固定的时隙工作，更新用户的位置，信道衰落，干扰水平，对用户
+进行实时的调度，其系统级仿真框架如图1所示。
+仿真场条：小区结构
+天线配置
+用广分布
+仿真模型：
+动态仿真模块
+HARQ
+系统性能评估
+信道衰落模型
+用广移动模型
+AMC
+接入
+用业务模型
+切换
+资源
+仿真参数配置
+调度
+链路级映射结果
+图1系统级仿真框架
+
+[[PAGE 44]]
+初始化部分
+系统性能统计
+更新大尺度衰落
+总顿数结束
+用户移动
+顺结束
+更新小尺度衰落
+行HARQ
+存储数据
+AMC
+HARQ请求
+链路级映射，杏表得
+资源调度
+BLIR
+图5系统级仿真算法流程
+
+[[PAGE 45]]
+表3：宏小区系统级仿真基本参数
+参数名+
+参数值+
+用户业务模型
+Full Buffer, V olP+
+小区分布
+六边形，了小区，每
+小区包含3扇区，
+wrap-around+
+站间距
+500 m*
+载波频率。
+2GHz+
+带宽←
+DL:10Hz UL:10vIHz+
+基于距离的路损..}
+-.128.1+37.61以单--
+位为 ktl, 是基站与用
+户间的距离
+对数阴影衰落+
+相同+
+衰落标准差+
+8dB+
+衰落的相关距离
+50m
+小区间的衰落相关值。
+0.5
+扇区间的衰落相关值。
+1.0*
+穿透损失
+20dB+
+固定天线模式3扇区
+(--m(一)
+小区的水平天线模式+
+8.. =70度+
+Am = 20 cB+
+系统使用的调制编码方式由QPSK、16QAM和64QAM以及1/2、3/5、2/3、3/4和4/5
+码率的Turbo编码结合构成，最大重传次数为3，重传合并的方式为Chase合并。
+其他仿真说明如下：系统评估采用的频率复用因子为1；下行链路每个子载波等功率
+发射；用户根据接收到的导频信号的SINR值选择服务基站，并在满足时延窗口后进行切
+换；对满Buffer业务采用PF调度算法，对VoIP业务采用M-LWDF算法；在下行链
+路，采用异步自适应HARQ方法；在上行链路采用同步HARQ方法。重传数据采用CC
+方式合并，重传数据包的MCS等级不变；上行链路的虚拟MU-MIMO采用随机用户配对
+方式。
+
+[[PAGE 46]]
+network lavout
+base-station deployment
+interference
+nacro-scale fading
+antennagainpattern
+structure
+tilt/azimuth
+antennagain
+shadow fading
+link-measurement
+micro-scale fading
+mobility management
+model
+precoding
+traffic model
+resource scheduling
+strategy
+link-performance
+power allocationl strategy
+link adaptation strategy
+model
+throughput
+error rates
+error distribution
+图系统级仿真框架
+3.1 工作流程
+3．1．1LTE上行系统仿真实现功能描述
+Traffic information
+Transport block
+Codeblock segmentation
+Channel coding
+Rate matching
+CRC attachment
+CodeblockCRCattachment
+Data and
+Control
+Uplink control
+multiplexing
+information
+Channel coding
+SC-FDMA signal
+Modulation
+Resource element
+Transform
+Bit-level
+Frame gen
+mapper
+precoder
+mapper
+gen
+scrambling
+Scrambling
+Reference signal
+Synchronization
+sequencegen
+seq. generation
+gen
+1.24位CRC校验码，生成多项式CRC24A
+
+[[PAGE 47]]
+2.CRC编码块分割，再加一次24位CRC校验码，生成多项式CRC24B，（若第一次
+CRC码块长度>6144）
+3.信道编码（Turbo编码，1/3码率，QPP(QuadraturePermutationPolynomial)交织器）
+4.速率匹配（包括以Turbo块为单位的频域交织及根据HARQ的亢余版本对数据进行
+打孔或重复）
+5.加入控制信息（包括控制信息的信道编码（1/3卷积码、线性分组码）。控制信息与
+数据满足时分的关系）
+.6.比特级交织（将上行控制信息按规定得位置映射到数据序列内后，进行行进列出交
+织，将一个传输块相邻载波映射到不同的OFDM符号内）
+7.比特级加扰（扰码为寄存器长度=31的Golden序列,初始状态与小区的Cellid,用户
+的nRNTI及时隙号有关）
+8.调制（采用QPSK,16QAM、64QAM)
+9.DFT变换（上行单载波传输）
+10.资源块的映射（包括数据的子载波映射，并对导频信号做相同的子载波映射，导频
+与数据满足时分的关系）
+11.IFFT变换
+12.加入同步时隙，成顿（加入DwPTS,UpPTS）
+服务区环境及参数配制确定了服务区形状、小区结构、Wraparound算法、仿真过程使
+用的控制参数；BS与UE的信息交换通过空中信道进行，空中信道分两类，一类是由慢
+衰、快衰及路损组成的无线信道；另一类是由时延及差错率进行建模的无线信道(时延及差
+错率的取值需要链路级的支持)。上行导频及数据信号需要经过第一类信道进行传输；
+控制信令、功控指令、切换指令需要经过第二类信道进行传输，这样做的目的是为了减
+少需要详细建模的物理信道的数量，加快仿真速度。为了满足3GPP中提出的需求，LTE
+上行系统(由于BS端及UE端两部分组成)主要完成四方面的工作，即功控、切换、ICIC及
+数据的发送和接收。
+在BS端，基站通过对上行导频的测量利用各种调度算法分配时频资源，然后通过速
+率预测确定上行的传输格式(grant信令）。对于接收到的上行数据信号，基站首先计算频
+域上各载波的SINR，然后利用EESM算法计算时域信号的等效SINR，再叠加上各种非
+理想因素的影响之后通过链路级曲线确定BLER，从而得到分组的传输质量，产生ACK
+/NAK信令并将其与grant信令一起封装到下行LI/L2控制信令中下发给UE。闭环功控
+指令可以通过ACK／NAK指令产生，并下发给UE。BS会利用一定的切换算法根据UE
+上报的下行导频测量结果以及目标BS的情况来判断是否可以发生切换并将相应的切换信
+令下发给UE。
+在UE端，移动台根据接收到的LI/L2层控制信令进行HARQ过程的处理：将分组
+序号等信息封装到上行L1/L2层控制信令中上报给BS；确定上行需要传输的数据（重传分
+组或从数据池中读取的数据)。上行导频的发射功率由开环功控和接收到的闭环功控指令
+决定，同时数据信道的发射功率会根据导频与数据信道的功率比而确定。LIE还会测量
+
+[[PAGE 48]]
+下行导频强度，并将其上报给BS。在接收到BS下发的切换指令之后，UE会进行相应的
+切换操作，如修改服务基站等。
+3.1．2 LTE下行系统仿真实现功能描述
+r(E, 1)
+Block Segment &
+PDSCH
+Channel
+CRC attachment
+Segment CRC
+Rate matching
+data
+coding
+attachment
+c',c"
+e(a,e9
+b(q)
+c(q)
+d(gu)
+d(g.r)
+g(q)
+r(D,)
+Block Segment&
+PDSCH
+Channel
+CRC attachment
+Segment CRC
+Rate matching
+data
+coding
+attachment
+Gold
+scrambling
+PMI & CQI report
+sequence
+sequence
+from Uplink
+Codewords
+layers
+CP attachment
+6()...b(M.-1)
+Sub-carrier mapper
+Multiplexing
+Modulation
+Antenna ports
+Resource element
+and scrambling
+OFDM
+mapper
+mapper
+modulation
+d"O)...d"(Mm
+(-..(M..-1)
+Layer
+Precoding
+mapper
+10
+Multiplexing
+Modulation
+and scrambling
+mapper
+Resource elenent
+OFDM
+mapper
+modulation
+x()-[( .. (] ()=[.. ( .. 
+scrambling
+Reference
+i=0, ,..M -1
+i=- ,..Mymb -1
+Reference signal
+signal
+sequence
+sequence
+generation
+codeword是经过信道编码和速率适配以后的数据码流。在MIMO系统中，可
+以同时发送多个码流，所以可以有1，2甚至更多的codewords。但是在现在LTE
+系统中，一个TTI最多只能同时接收与发送2个TB，所以最多2个codewords;
+layer和信道矩阵的“秩”（rank）是一一对应的，信道矩阵的秩是由收发天线
+数量的最小值决定的。例如4发2收天线，那么layer/rank=2；4发4收天线，
+layer/rank=4；codeword的数量和layer的数量可能不相等，所以需要一个layer
+mapper把codeword流转换到layer上（串并转换）；一根天线对应一个layer，经
+过layer mapper的数据再经过precoding矩阵对应到不同的antenna port发送。
+1.信源数据（业务数据）
+2.24位CRC校验码，生成多项式CRC24A
+3.CRC编码块分割，再加一次24位CRC校验码，生成多项式CRC24B，
+（若第一次
+CRC码块长度>6144)
+注：首先对输入的TB块进行CRC添加和码块分割以及后继的CRCCB块添加。这
+样做主要是实现接收侧CRC的双重校验，TB块的校验可以检出CB块未校验出的错误，
+保证校验的准确性。
+4.信道编码（Turbo编码，1/3码率，QPP(QuadraturePermutationPolynomial)交织器）
+
+[[PAGE 49]]
+5.速率匹配（包括以Turbo块为单位的频域交织及根据HARQ的亢余版本对数据进行
+打孔或重复
+6.比特级加扰（扰码为寄存器长度=31的Golden序列,初始状态与小区的Cell id,用
+户的nRNTI及时隙号有关）
+调制（采用QPSK,16QAM、64QAM)
+8.层映射及预编码处理
+a.层映射：即将1个或2个传输块TB的数据串并变换为M并行数据流，M为层
+数。M必须小于等于发送天线数。对于基于码书的Precoding中，M需小于等于接收天线
+数以保证左伪逆的存在。
+注：在同一个传输信道(比如 DL．SCH和 UL.SCH)上发送的同一个用户的多个逻辑
+信道上的数据经过调度模块最终复用成一个TB(Transport Block)块。在没有 MIMO 的情
+况下，每个用户每个TTI只能发一个TB块。
+b.对各个层的数据，进行相应的预编码处理。在LTE中，所有的MIMO方式均可
+表示为一个预编码矩阵与原始信号的相乘，不同MIMO方式，其预编码矩阵不同。包括
+SFBC, Codebook precoding with CDD or without CDD.
+9.资源块的映射（包括数据的子载波映射，并对导频信号做相同的子载波映射，导频
+与数据满足时分的关系）
+10.IFFT变换
+11.加入同步时隙，成帧（加入DwPTS,UpPTS）
+PDCCH（物理下行控制信道）
+DCI1
+用户加扰
+信道编码
+CRC附加
+速率匹配
+An 0
+小区加扰
+OFDM调制
+DCI2
+CRC附加
+用户加扰
+信道编码
+速率匹配
+调制映射
+小区内的
+每个天线
+An l
+OFDM调制
+PDCCH
+口的物理
+信道合并
+资源映射
+层映射
+...
+DCInPDCCH
+预编码
+An P
+信道编码
+用户加扰
+速率匹配
+CRC附加
+OFDM调制
+PDSCH（物理下行业务信道）
+
+[[PAGE 50]]
+功率因子
+E-NodeB基带一业务信道处理链
+天线口
+符号流
+资源元
+OFDM信号
+映射
+Turbo编码
+速率匹配
+产生
+第1个数据
+码块
+码块
+CRC
+码字流
+加扰
+调制映射
+附加
+分割
+流产生
+级联
+层映射
+速率匹配
+Turbo编码
+预编码
+1.单天线
+1.单天线
+2.复用
+2.复用
+3.分集
+速率匹配
+Turbo编码
+码字流
+3.分集
+第M个数
+CRC
+码块
+码块
+调制映射
+加扰
+天线口
+附加
+分割
+据流产生
+级联
+符号流
+资源元
+OFDM信号
+Turbo编码
+速率匹配
+映射
+产生
+功率因子
+foreachsimulatedTTI do
+moveUEs
+ifUEoutsideROI
+then
+UE
+reallocate
+randomly in ROI
+for eacheNodeB do
+receiveUEfeedbackafteragivenfeedbackdelay
+scheduleusers:
+（1）最大载干比（2）轮循（3）比例公平（李猛）
+for eachUE do
+1-channelstate →linkqualitymodel→SINR， MCS， CQI （赵帝）
+2-SINR，MCS-→linkperformence model →BLER， ACK/NACK,throughput （韩延
+涛)
+3-sendUEfeedback,CQI+ACK/NACK（韩涎涛）
+下行系统仿真与上行类似，首先需要完成初始参数赋值，服务区环境搭建及无线信道
+初始化。为了满足3GPP提出的需求，LTE下行系统(由于BS端及UE端两部分组成)主要
+完成三方面的工作，即切换、ICIC及数据的发送和接收。
+
+[[PAGE 51]]
+LTE TX
+signaling
+eNodeB output
+channel
+delay
+interference
+channel outputs
+LTE RX
+UE output
+在BS端，基站在CQI反馈的基础上，利用各种调度算法分配时频资源，然后通过
+速率预测确定下行的传输格式(grant信令）。根据接收到的ACK/NCK信令进行HARQ
+过程的处理，确定下行需要传输的数据(重传分组或从数据池中读取的数据)。
+user feedback
+LTE TX
+chalel coding of userdata bits
+scheduler
+coding
+user 1
+user 2
+user i
+params
+user mapping
+MIMO TX and OFDM mapping
+resource biock
+assigument
+TX signal
+signaling
+在UE端，对于接收到的下行数据信号，基站首先计算频域上各载波的SINR，然后利
+用EESM算法计算时域信号的等效SINR，再叠加上各种非理想因素的影响之后通过链路
+级曲线确定BLER，从而得到分组的传输质量，产生ACK／NAK信令反馈给基站。UE还
+需测量下行导频强度，将测量结果打包成CQI反馈给基站。此外基站还会定期监视UE
+下行导频强度，达到一定门限时，基站会下发切换指令，并和目标基站进行协商，执行切
+换过程。
+
+[[PAGE 52]]
+received signal
+signaling
+LTE RX
+user
+resource block grid
+channel
+resource block
+estimation
+disassembling
+MIMO RX and OFDM demapping
+channel decoding
+decoded
+user
+BER
+throughput
+data bits
+feedback
+BLER
+3.2各个细节模块
+TD-LTE系统级动态仿真平台首先需要实现TD-LTE系统的基本功能，包括物理层顿
+结构的定义以及仿真时间推进机制的实现、仿真环境、对象、用户移动特性、业务、衰
+落、系统级和链路级动态接口、性能统计等功能模块。
+全局定时模块的时隙定时到达之后，首先判断本时隙为上行还是下行时隙。若是上
+行时隙，则先发送定时中断到所有的用户，再发送定时中断到所有的eNodeB；若是下行时
+隙，则先发送定时中断到所有的eNodeB，再发送定时中断到所有的用户。这样可以确定对
+于发送端的设置可以在接收之前完成。全局定时模块给各个节点发送完定时中断之后，根
+据本时隙的长度，设置下一个时隙定时的发生时间，从而将仿真时间按照TDDLTE系统
+的时隙结构不断向前推进
+资源块等效信噪比的计算。TD-LTE仿真平台使用接收信号的SINR（信干噪比）作
+为CQI（信道质量指示），即SINR直接影响信号的接收质量，SINR越高则正确接收的概
+率越大，因此，需要对每个用户整个共享信道上的每个资源块（ResourceBlock,RB）的
+SINR进行计算。图3为LTE下行资源块设计图，相邻的12个子载波被划分在一个资源块
+内，承载传输的数据。
+用户在每个子载波上接收到的SINR值为/（）iCINSINR=PP+P，其中i为子载波标
+号，cP、IP和NP分别为接收的信号功率，干扰功率和噪声功率。计算得到每一个子载波
+上的SINR值后，对每个资源块上的12个子载波SINR进行EESM合并，可以得到一个
+RB上的 SINR值。
+使用EESM时候，一个终端的所有子载波都要使用相同的调制和编码方式（MCS），
+而MI-ESM则无此要求。
+注：计算effective-sinr时，为了简化计算，只考虑了两个sub-carriers perRB????
+调度算法主要关注两点：系统吞吐量和用户公平性。传统的调度算法主要有轮循调度
+（RoundRobin）、最大C/I调度（MaxC/I），前者保证了用户间的绝对公平性但没有考
+虑到各个用户的信道状况，后者充分利用了用户的信道状况，使系统的资源总是给信道质
+
+[[PAGE 53]]
+量最好的用户使用，从而使系统的总吞吐量达到最高，但是由于系统资源只给信道质量好
+的用户使用，所以完全不能保证用户间的公平性，高通公司提出的正比公平调度算法或称
+比例公平调度算法（ProportionalFairnessScheduling，PFS）同时兼顾了用户的公平性和系
+统的吞吐量，成为系统级仿真平台中的主要调度算法。
+对满Buffer业务采用PF调度算法，对VoIP业务采用M-LWDF算法；
+改进的最大权重时延优先算法（ModifiedLargestWeighted DelayFirst，M-LWDF）
+自适应调制编码（AMC）在TD-LTE系统中，根据当前的无线信道状况而自适应的改
+变传输参数可以带来系统性能方面的改善。改变传输参数补偿信道条件变化的处理过程称
+为链路自适应，自适应调制编码（AMC）就属于其中一种。AMC的原理就是在系统限制
+的范围内，根据信道质量情况变化，灵活地调整每个用户数据的调制与编码方式
+（MCS）。处于有利位置的用户（通常是那些距离基站很近的用户），会被赋予较高的调
+制与编码方式（比如64QAM4/5Turbo码率）；而处于不利位置的用户（通常是那些处于
+小区边界的用户），会被赋予较低的调制与编码方式（比如QPSK1/3Turbo码率）。MCS
+选择基于CQI计算和调度策略进行，eNodeB根据分配给用户的资源块和用户反馈
+的CQI，可以查表确定传输所用的MCS。
+是根据信道条件的变化来动态地选择适当的调制编码方式（Modulationand
+CodingScheme,MCS），变化的周期为一个发送时间间隔（Transmission Time
+Interval，TTI）。AMC是基于信道质量指示（ChannelQualityIndicator,CQI）信息反馈实
+现的。CQI的测量过程是接收端根据信噪比测量值，找出HARQ第1次重传能够达到误块
+率小于0.1的MCS，然后反馈相应的CQIindex。CQI信息用来指示传输块尺寸、MCS等
+参数。AMC主要由信道估计和CQI这两个模块实现。eNodeB侧信道估计模块估计当前
+的CQI信息，并由此确定传输块大小(TransportBlockSize,TBS)，MCS等参数，通过理想
+反馈信道发送给UE,UE按照eNodeB的调度进行相应的传输。
+4.业务模块
+参考：B3G系统中数据业务通用模型的仿真建模
+4.1数据业务的通用模型
+参考：《B3G系统中数据业务通用模型的仿真建模
+数据业务的种类很多，新业务层出不穷，各有特点，但统一到传输层抽象来看，业务
+数据全部封装到IP数据包当中后，差异无非就只有分组包的大小和它的QoS要求。其
+中，QoS一般包括时延要求、防抖动要求以及对传输正确程度的要求。我们在仿真时只需
+要把这些特征抽象出来，不考虑各种业务在应用层的表现形式。而QoS一般由调度算法
+来保障，传输结束时将对满足QoS的程度进行精确的量化统计。
+发送端网络层的分组数据包在仿真中一般都是由链表来表示，链表中的每个节点代
+表一个包，并且各节点采用先进先出（FIFO）的原则。到了无线链路控制（RLC）层和媒
+体接入控制（MAC）层再加上开销比特，分装成传输块，并映射到相应的物理信道。
+
+[[PAGE 54]]
+每次时间驱动的业务更新需要进行的3个常规处理包括判断当前的业务状态是否该转
+换、判断是否该生成新的数据包、判断链表队列的第一个包（或称头包）是否需要丢
+弃或重传，然后进行相应的处理。这3个常规处理也对应了区分各种不同业务的3个明显
+特征。
+当前时隙特定业务的业务状态一般都有多种，而且跟具体的业务种类直接相关，这是
+区分业务的明显特征之一。如VoIP业务有激活与非激活状态，FTP业务有阅读状态和数
+据包生成状态，而用来测试系统性能的满队列（FullQueue）业务则只有一种状态，等
+等。
+同一种业务处于不同的业务状态也会有不同的数据包生成规则。如VolP业务在激活
+状态发送的数据包与非激活状态相比，时间间隔较短、数据量较大；FTP在阅读状态不会
+生成任何数据包。因而，这是区分不同业务的第二个明显特征。
+第三个明显特征是对头包的处理。有时延要求的业务，一般在头包时延（从数据包生
+成时刻到当前时刻的时间间隔）大于某个门限时将会对包进行特殊处理，或丢弃（如
+VoIP业务）、或重传（如HTTP业务）。而这种门限对于特殊业务有可能会有多个，每个
+门限对应其相应的处理方法。对时延不敏感的业务，也可能没有这种门限（如满队列业
+务），或者门限值会比较大（如E-mail业务）。
+上述3个判断分别引出3种处理流程，也即各种业务通用模型时间驱动的3大功能：
+状态转换、生成新数据包和对头包的处理。
+事件驱动则是由特定的事件来触发的。即，调度器调上了某个用户进行传送，则需
+要对该用户的业务队列缓存器进行处理（队列处理）。这种处理包括从业务缓存器减去
+相应的已传数据、作相关的统计、判断当前头包是否为空，如果头包为空还需要判断该
+包是否满足QoS要求，并统计头包的传送信息，最后把它从队列中删去。在这个处理功
+能中，大部分过程都是各业务通用的，只有判断是否满足QoS时是每种业务有所差异。这
+也可以归纳为区分各种业务的第4个特征。
+状态转换
+时间驱动型功能
+新包生成
+通用模型
+头包处理
+事件驱动型功能一队列处理
+图1数据业务通用模型的功能结构简图
+4.2Full Buffer 业务
+其实质可以看成是下载数据量无限大，而用户阅读时间为0的FTP业务。也就是说队
+列缓存器永远都是满的（或者永远都是有剩余数据的），只要用户被调度上，就肯定有
+数据来被系统传送。所以有时候也称它为满缓存（Full Buffer）业务。它也是对于数据业
+务的一种简化，用处很大，在系统仿真分析中经常要用到。它可以用多种模型来实现，但
+为了采用本文提出的通用模型，对它的建模仍套用以上的处理流程，下面也对其进行简单
+分析：
+(1)状态转换。因为此业务只有一种状态，所以任何时刻都无需进行状态转换的判
+断。
+
+[[PAGE 55]]
+(2)新包生成。仿真初始时刻给缓存器存入一个IP包，它的大小只需保证在一次业务
+更新周期内传送不完，一般设为超过传送能力上限的一个值。而每次生成新包时让队列总
+数据量等于这个值即可。
+(3)头包处理。一般无需处理。
+(4)队列处理。一般只把传送的数据量记录即可。如果要统计时延，则需对模型进行
+一点改进，使每次生成的新包大小一致，这样才有可比性。有时根据特殊需要，还要统计
+其他信息，这时也可以再作其他改进措施，同样不会影响模型的框架结构。
+4.3VoIP 业务的建模
+传统的话音业务模型的参数一般包括：呼叫的到达间隔时间和持续时间，这两个参数
+都服从负指数分布，即传统的话音业务可以用泊松过程描述。而VoIP业务与其他数据一起
+在分组域中传输，建模就不那么简单了。
+注意，仿真过程中并没有真实的语音。
+为了降低传输速率、提高系统容量，VolP业务源一般都采用二状态话音激活技术。
+两个状态分别为激活状态和非激活状态（静默状态）。图2所示为二状态的转移概率
+图，其中a和b均为转移概率。则话音激活因子可以表示成兀=
+a+b
+1-a
+1-b
+激活软态
+1激活状态
+图2二状态话音激活模型
+数据源编码方式一般采用RTPAMR12.2，其数据速率为12.2kbit/s。AMR是3GPP
+采用的语音编码标准。AMR数据率为：4.75-12.22，共八种；帧长为20mS；每个帧包含的
+数据信息比特数为95-244。AMR能够根据链路自适应选择8个类别中的一个。如果无线环
+境比较差，那么源编码比特就减少，而信道编码比特相应增加。通过这种方式牺牲了一定
+的语音清晰度，但提高了整体质量与增强了鲁棒性。这里我们为了简化VoIP业务模型，
+关闭了AMR链路自适应功能，固定数据率为12.2kbps，
+对应最差的信道环境情况下的编
+码数据率。
+采用话音激活技术后，该模型每T时间更新一次，更新频率为R=1/T。T为语音编码
+顿长，典型值为20ms。在激活状态时，数据源每20ms发出一个大小为320bit的IP包
+（包括数据和开销）；在非激活状态时，数据源每160ms（每8）发出一个大小为160
+bit（只含开销，无数据）的IP包。故其长期统计平均速率可算出为8.5kbit/s。由于VolP
+业务对于时延较敏感，一旦某个数据包时延达到200ms（丢包门限），即可认为它不具有
+时效性，把它丢弃（此时在对方终端发声器表现为出现一个短暂的中断，如果前后的包都
+正常的话，用户不易察觉）。根据以上的业务模型，可以套用通用模型作以下的分析：
+
+[[PAGE 56]]
+（1）状态转换。每隔一定的时间间隔（如20ms），根据设定的转移概率随机判断是否
+转换当前的状态。
+(2)新包生成。根据当前的状态和生成新包的时间间隔（iT+T，i为帧号，T为时
+延抖动)，决定当前时刻是否该生成新包。包大小和数据率由编码方案决定。不同的业务状
+态会有不同的数据包生成规则。VoIP业务在激活状态发送的数据包与非激活状态相比，
+时间间隔较短、数据量较大。激活状态每
+20ms产生一个新包，非激活状态每
+160ms产生一个新包。
+(3)头包处理。判断当前时刻头包时延是否达到丢包门限，如果是的话就将其抛
+弃，并作相应的统计。丢包率是VolP业务的一个重要统计指标，它的大小将影响
+QoS.
+(4)队列处理。如果该用户被调度上，则在队列缓存器中减去相应的数据量。如果
+头包已传送完毕，则须统计相关信息，比如此时的头包时延（即为该包的传送时延）。
+特定用户平均的传送时延也是一个重要的QoS指标，也是衡量小区容量的唯一根据。“
+意”。而某个系统能够把中断的用户比例控制在2%以内的最大同时服务用户数则称为
+VolP业务系统容量，反映了系统接纳服务的能力。
+4.4HTTP模型介绍
+HTTP业务模型
+分组到达间隔
+一个分组呼叫
+阅读时间
+一次会话
+此次会话中第一
+此欣会话中最后
+个数据包
+一个数据包
+图业务基本模型
+HTTP业务的基本模型如图所示。假设当阅读时间中止后，用户立即发出新的网页请
+求，周而复始。这个模型给出了激活和休眠两个状态，激活状态对应网页请求和数据下载
+的过程，休眠状态对应所有对象下载完毕到下一个请求发出之间的过程。在激活状态下，
+可以实现多个对象建立多个TCP连接的并行传输（对应HTTP/1.0的情形）。
+上图采用了三层的结构来描述：会话（session）、分组呼叫（packetcall）、分组
+(packet)。
+一次会话由on/off阶段代表Web网页的下载时间和阅读时间。
+
+[[PAGE 57]]
+程。其中，每个分组呼叫又分为主对象和内嵌对象，主对象和第一个内嵌对象之间的时间
+间隔称为网页的解析时间。如图2.16所示：
+分组呼叫
+分组呼叫
+阅读时间
+主对象解析
+内嵌对象
+主对象内嵌对象
+时间
+图2.16主对象和内嵌对象的返回过程
+一个分组对应一个对象的到达，传输过程中对象根据协议规定的（maximum
+transmitunit）MTU分为多个包。packet的间隔时间服从Geometry几何分布
+主对象和内嵌对象的区别如图2.17所示，最初的HTML页被称作主对象（main
+object），主对象中的每一个构成对象（constituentobject）被称作内嵌对象
+(embedded object) 。
+What's News
+THE WALLSTET JOURNIL
+TECICRVTER
+内嵌对象
+M Th Atatvg+
+SYHNMALLSTRIZTERSL
+THOIONTER
+AECIEA
+内嵌
+对象
+Fufirsu
+主对象
+图2.17主对象与内嵌对象的区别
+HTTP业务模型的参数
+基于以上的分析，HTTP业务用以下几个参数表示：
+
+[[PAGE 58]]
+S*：网页中主对象的大小；
+S。：网页中内嵌对象的大小;
+N。：网页中内嵌对象的数量；
+Dre：阅读时间；
+T：主页的解析时间。
+对采集到的数据进行处理，就可以得到描述业务模型的各个参数的概率分布，然后将
+得到的分布与标准的概率分布函数比较，取最接近的标准概率分布为相应的参数分布。用
+Q-Q画图工具（Quantile-Quantile plot，见参考文献[7]）来检测采集到的数据和其他
+标准分布函数的吻合程度。参考文献中列出的HTTP模型各个参数的统计分布，如表2.4
+所示：
+表 2.4 HTTP 模型参数
+模型的各
+服从的分
+分布参数
+概率密度函数
+个部分
+均值：
+10710B
+方差：
+主对象大
+25032B
+截短的对
+fx
+exF
+数正态分布
+最小值：
+ =1.37,±= 8.35
+100B
+最大值：
+2MB
+均值：
+7758B
+方差：
+内嵌对象
+126168B
+截短的对
+exF
+22
+大小 s
+数正态分布
+最小值：
+ = 2.36, ±= 6.17
+50B
+最大值：
+2MB
+
+[[PAGE 59]]
+均值：5.64
+内嵌对象
+截短的
+最大值：
+数量N
+Pareto分布
+53
+-1.1,&-2,m-55
+注 4
+阅读时间
+负指数分
+均值：30s
+,x≥0
+Dre
+3 =769
+解析时间
+负指数分
+均值：
+0.13s
+2-0033
+注：从生成的随机数中减去k得到Nd
+从上表来看，对数正态分布和Pareto分布都采用了截短的形式，是为了防止出现太
+大或者太小的随机数而使生成的参数偏离正确的结果，所以规定了最大值与最小值。
+注：模型的建立是在采集了1900多位用户的数据，前后发出了24000多个网页请
+求。主要应用Tcpdump 和 Tcpshow [4]两个工具对数据进行分析。Tcpdump 工具记录
+了TCP/IP分组头以及300B的TCP净荷信息。300B的TCP净荷信息包含了我们需要
+研究的HTTP请求和应答的分组头信息。通过HTTP的分组头信息字段可以分析得到关于
+HTTP业务的很多信息，例如，判断是否是网页请求，判断当前连接是激活的还是已经关
+闭。Tcpshow工具翻译采集到的分组中的二进制信息。它分别对HTTP分组头信息和
+TCP分组头信息进行解析，分别获得关于HTTP层和TCP层的有关参数。
+5.VoIP音质客观评测模块
+已经通过上述介绍的系统级仿真为分组语音质量仿真提供必要的输入参数，主要是分
+组丢失率、连续分组丢失、时延、时延抖动等。
+PSQM和PESQ法基于传统的电话网络，测量不是基于数据网络的，不能反映诸如延
+时、抖动和丢包等数据网络特有的问题，没有考虑网络故障对用户感觉造成的影响，单纯
+的从收发信号差异的角度分析网络语音问题。
+E-model，它关注数据全面的网络损伤因素，很好地适应在数据网络中语音质量的评
+估。
+E-model用来作为算法最终结果的是R值，取值范围从0到100。Ro是无网络延时和
+设备损伤因素的基本信号与收发噪声以及电流、背景噪声之比，即基本信噪比
+。但是因为
+网络和设备损伤因素的存在，减少了通过网络的语音质量，R值的基本计算公式如下：
+
+[[PAGE 60]]
+ITU-T的G.107标准提出的E模型考虑了延时、噪声、回音、编码器性能、丢包、
+抖动等网络损伤因素对语音质量的影响。它的评价标准如图1所示。
+图1用户满意度等级与R值和MOS值的范围对应表
+根据ITU-TG.107的定义和实际测试所需的参数可以求出R的值。传输参数R的表
+达式为：
+（1）Ro表示基本的信噪比，Ro的表达式为：
+其中，SLR表示发送端响度评测值，No表示不同噪声源功率之和。
+No的表达式为：
+其中，Nc表示电路引起的所有哚声功率之和，Nos表示发送端背景噪声引起的电路噪声，Nor表示接收端背景噪
+声引起的电路噪声，Nfo表示接收端的噪声。影响Ro的主要因素包括：响度评测值（SLR，RLR），背景噪声（PS，
+Pr），电话延迟值（DS，Dr），说话者回音响度额定值（TELR）。
+（2）Is表示语音实时传输所产生的同步损伤，Is的表达式为：
+
+[[PAGE 61]]
+其中，Iolr表示是由太低的响度评测值所引起的质量的下降，Ist表示是由非适宜的电话噪声引起的损伤，Iq表示
+量化失真所造成的损伤。影响Is的主要因素有：响度评测值，背景噪声，电话延迟值，说话者回音响度额定值，单向
+延迟时间（T），量化失真度（qdu）。
+（3）Id表小语音信号的延迟损伤，Id的表达式为：
+其中，Idte衣小发送端回音所造成的损伤，Idle表示接收端回音所造成的损伤，Idd表示太长的绝对延迟所引起
+的损伤。影响Id的主要因素有：延迟，说话名向音响度，背景噪声，响度评测值等。
+（4）Ie-eff表示低比特率编码及丢包所造成的损伤，Ie-eff的表达式为：
+其中Ie表示设备损伤因素，Bbl表示丢包主要因素，Ppl表示去包率。
+（5）A表示优势损伤因素，它是当有其它优势传递到用户的一种补偿，通常情况下设置为零[4]。
+在E-Model测量中包含了影响窄带电话通话质量的多种传输参数，在ITU-TG.107中提供了一组默认值，当终
+端和应用环境是正常的，可以直接使用这些默认值。根据这些默认值和一些可求的参数比如延时、丢包率等可以得到
+E-Mode输山的传输参数R。R直越大，说明语音质量越好，R值的范围是0-100，0是最差的，100是最好的。
+平均主观值MOS是1-5之间的数，1是语音质量最差的，5是语音质量最好的。R值可以通过下面的公式转化成
+MOS分：
+IP电话网络损伤的主要因素包括延时、噪声、回音、语音编码和丢包[5，6]：
+
+[[PAGE 62]]
+路时间，则存在抖动，抖动越大则语音质量下降的越明显。在E模型中采用固定缓冲区的方法，可以使抖动的影响转
+化为延时[7]。
+（2）回音（echo），是由语音网络巾的电气反射引起的，延时超过16ms的回声对说话人会有影响。下文通过
+说话者回音响度额定值（TELR），来检测回音对语音质量的影响。
+（3）噪声（noise），是影响语音质量的一个关键因素，下文分别通过发送端背景噪声Ps和接收端背景噪声Pr
+来分析噪声对语音质量的影响。
+（4）语音压缩（Speechcompression），在语音处理中语音编码有很多种方式，每·种都有不同的特点。低速
+的编码方式占用较少的带宽，但是低速编码使用有损的压缩算法，削弱了语音质量。仿真将采用标准为G.711、
+G.729A、G.723.1的编码方式，演示编码对语音质量的影响，其主要参数如表1所示。
+表1标准编码器的主要参数
+（5）丢包（Packetloss），是影响语音质量的又·个关键因素。数据包发送端和接收端之间的数据包数目的差
+值即为网络传输丢失包数目。当少量的丢包且是随机地分布时，人耳并不容易感觉到较差的语音质量。当丢包数量变
+大时，语音质量也就相应的变差。
+编码器
+le model
+丢包率
+MOS分
+E-model
+延迟时间
+Id
+Ppou-p!
+实际应用中，基本公式中的输入Ro、Is、Id和Ie，每一个都需要考虑各种各
+样的实际网络损伤因素，通过非常复杂的数学计算而得到。
+R值可以映射为MOS分值。由于网络数据与实际语音之间存在转化过程，这样固有的
+93.2,
+G.107 白
+损耗使得R值最大只能到
+也就是平均主观值MOS只有4.4。
+的R值默认最大
+为 94。
+
+[[PAGE 63]]
+Excelrnas
+God4.
+Dsutyed
+Bat !
+00
+图8延时和语音质量的关系+
+网络损伤的主要因素包括语音编码、回声、平均包延时，抖动和包丢失率。
+回声产生于IP网络与传统PSTN相连处，在单一VoIP网络内部暂不讨论。
+在一个仅由编码、
+延时、抖动和丢包造成系统失真的情况下，R的计算公式可以简化
+如下：
+Ｒ=ＲｏＩｏdｅｃｌdｅｌａyｌｐdｌｐａｃｋｅｔｌｏｓｓ
+下面将讨论这四个主要损伤因素对R值的影响。
+编码是以硬件或软件的方式去采样语音和决定数据包的速率。ITU标准定义了差不多
+十几种编码方式，每一种都有不同的特点。低速的编码方式占用更少的带宽，但是因为使
+用有损的压缩算法，低速编码更加削弱了语音质量。在实际情况中，选择低速的编码方式
+能够在相同的连接上建立更多的呼叫，但是引入了更大的延时，使语音质量对丢包也更加
+敏感。因此选择越低速率的编码方式，将明显地减少E模型的R值，当然这也不是完全绝
+对的。下表显示了一些常用的编码方式对应的Ie值和固有R值。
+延时是指话音从发起者到接收者所经过的时间，一般而言，端到端的延时由以下四部
+分组成：
+（1）传播延时：指话音从一端到另一端通过网络的时间，由信号通过传播媒介的速
+度和传播的距离决定
+（2）传送延时：指通过网络路径上的所有网络设备的时间
+（3）包转化延时：指的是编码器进行数模转化的时间
+（4）抖动缓冲延时：指的是在接收端用来保持一个或多个接收的数据包的时间，用
+来克服数据包到达时间的变化，也就是克服抖动产生的延时
+延时会引起语音会话过程的空白，带来语音的变形和会话的中断，也就是说，延时的
+增大导致了R值的减小。延时的时长在100~200ms之间开始被收听者所察觉，使得会话不
+自然。建议的延时上限为150ms，若延时达到200ms则开始有严重的会话中断。
+抖动，也叫做延时的变化，是指在一个VoIP呼叫过程中所有发送的数据包到达的时
+间差异。当一个数据包发送时，发送端在RTP报文头上增加一个时间戳；当在另一端被接
+收时，接收端同样增加另一个时间戳；计算这两个时间戳可以得到这个数据包的通路时
+间。如果在一个呼叫中包含不同的通路时间，则存在抖动。在视频应用程序中，抖动表现
+为图像闪动，而在电话呼叫中，它表现的效果与丢包产生的效果相似，某些字词听不清楚
+
+[[PAGE 64]]
+或错误。抖动的大小取决于数据包的通路时间的差异程度，差异程度越大，则抖动也越
+大。如果抖动值大于50mS，则平均主观值MOS值剧烈地降低，认为是极差的语音质量。
+通过增加抖动缓冲的数量，可以有效地降低抖动的影响，但是增加了一毫秒的抖动缓冲，
+则相应增加了一毫秒的网络延时。
+丢包是一个影响语音质量的关键因素。数据包发送端和接收端之间的数据包数目的差
+值即为网络传输丢失包数目。VoIP使用RTP实时传输协议传输语音数据包，虽然可以利
+用RTP报文头的序列号检查数据包的丢失和乱序，但是它并没有重传机制。任何丢包和乱
+序都将影响语音的质量。网络主要有两种类型的丢包情况，一种是或多或少的随机丢包，
+当网络保持冲突碰撞时，就会偶尔有一个或两个数据包发生丢失；另一种是爆裂丢包，是
+指连续一个以上的数据包丢失，会显著地影响语音质量，明显减小R值。当少量的丢包是
+随机地分布时，人耳并不容易感觉到较差的语音质量。VoIP中丢包与丢帧概念：在整个
+过程中，编码、解码是以语音顿为单位进行的，而在网络中的传输则是以语音包的形式进
+行的。换句话说，一个语音包里可以包含一个或多个语音顿，所以丢包与丢顿不是完全等
+价的。丢包对VoIP语音质量的影响较大，当丢包率大于10%时，已不能接受，而在丢包
+率为5%时，基本可以接受。因此，一般要求IP承载网的丢包率小于5%。
+E-model测量方法正是将这些网络的损伤因素充分予以考虑，以此作为对网络语音质
+量的全面传输评估，真正意义上的研究了数据包化的语音呼叫的质量问题。
+运用E-model对实时的VoIP网络进行语音质量测量
+在数据网络的软件代理之间产生RTP数据流去模拟VoIP语音呼叫，每次这个模拟
+VoIP语音呼叫运行时，网络延时，抖动和丢包将作为测量结果而被记录，这个测量通过
+E-model计算公式得到一维的结果R值，然后再对应到平均主观值MOS。注意，并没有
+真实的语音信号通过数据网络。
+编码器
+le
+le mxdel
+丢包率
+MOS分
+E-model
+延迟时间
+Id
+id-rnodei
+四、精细理解
+1.LTE 中的上行时间同步
+不同UE的上行信号到达eNodeB时要时间对齐，以保证UE之间上行信号的正交性，
+从而有助于消除小区内的干扰。
+上行传输的时间对齐是通过在UE发送侧应用
+TA
+（Timing Advance）来实现的。TA
+的主要目的就是为了消除UE之间不同的传输时延。
+
+[[PAGE 65]]
+UE在初始接入LTE的过程中，首先发送上行的PRACH前导序列，eNodeB通过测量
+UE的前导序列，在随机接入消息中（RAR）返回给UE11位的初始TA值（在0到1282
+之间取值）。TA的时间范围为0到0.67mS，粒度为0.52us（16Ts，16/15000X2048)），
+对应小区的半径最大为100KM。UE根据RAR中的初始TA值，做相应的上行时间调整
+NTA = TA'16
+UE在获得初始同步以后，随着时间的推移，由于信道情况的改变或者UE（以及
+eNodeB）的时钟漂移，UE可能重新变为失步状态。为此eNodeB会周期性的为UE发送
+TA命令，指导UE进行上行的同步，并且eNodeB为每个UE配置了一个Time Alignment
+Timer，规定了TA的有效期，为此eNodeB需要在UE的能力和系统的开销之间进行折
+中。UE在每次接收到eNodeB的 TA命令后，都将此定时器重置为零。在Time Alignment
+Timer超时以后，如果UE未能收到任何的TA命令，那么UE认为上行已经失步，此时
+UE不能再进行任何的上行数据传输，而必须通过随机接入的过程来对上行的TA进行重新
+初始化。
+UE接入到LTE系统以后，获得初始的上行同步，开始可以发送上行信号。eNodeB通
+过对UE上行信号（包括SRS，CQI，HARQ以及PUSCH中的数据等）的时间进行测
+量，来决定TA的时间并在适当的时机发送相应的TA命令给UE。与初始接入相应中的
+TA不同，此时的TA为6个Bit，在0到63之间取值，代表现时的TA与上一个TA之间
+的偏移值，即：NTA,new=NTA,old +(TA-31)16.
+对于在子顿N收到的TA命令，UE会在子顿N十6应用相应的时间偏移。如果由于
+TA时间的调整，使得子顿N和子N十1存在相互重叠的部分，那么UE会传输完整的子
+N而忽略掉子帧N十1中相应的部分。
+2.参考信号
+下行参考信号是以RE为单位的，即一个参考信号占用一个RE
+这些参考信号可分为
+两列：第1参考信号和第2参考信号。第1参考信号位于每个0.5ms时隙的第1个OFDM
+符号，第2参考信号位于每个时隙的倒数第3个OFDM符号。第1参考信号位于第1个
+OFDM符号有助于下行控制信号被尽早解调。在频域上，每6个子载波插入一个参考信
+号，这个数值是在信道估计性能和RS开销之间求取平衡的结果，RS过疏则信道估计性能
+无法接受；RS过密则会造成RS开销过大。每6个子载波插入一个RS既能在典型频率选
+择性衰落信道中获得良好的信道估计性能，又能将RS控制在较低水平。RS的时域密度也
+是根据相同的原理确定的，每个时隙插入两行RS既可以在典型的运动速度下获得满意的
+信道估计性能，RS的开销又不是很大。在参考信号的设置上的考虑主要是基于对高速移动
+性的支持。
+
+[[PAGE 66]]
+oneantennaport
+Freq
+: Rs symbol for antenna port o
+: Rs symbol for antenna port 1
+: Rssymbolforantennaport2
+Time
+:Rssymboltorantennaport3
+twoantennaport
+four antenna pon
+Antenna port 2
+Antennaport0
+Antennaport1
+Antennaport3
+图2.3.1-1天线端口对应的参考信号
+天线端口可以有1个，2个和4个，不存在3个天线端口的情况。
+switch LTE_config.nTX
+% number of
+reference symbols
+case
+numb
+4 ;
+case
+numb
+8;
+otherwise
+numb = 12;
+end
+（以上对于TDDFDD均适用，0.5s)
+3.同步信号设计
+P-SCH用于时隙同步，S-SCH用于顿同步
+
+[[PAGE 67]]
+除了TDD固有的特性之外（上下行转换、特殊时隙等），TDD帧结构与FDD帧结构的
+主要区别在于同步信号的设计。LTE同步信号的周期是5mS，分为主同步信号（PSS）和辅
+同步信号（SSS）。LTETDD和FDD顿结构中，同步信号的位置/相对位置不同，如图3所
+示。
+Subframe#
+FDD
+TS#I
+Subframe #!
+Subframc#2
+0 sss
+pss
+UpPTS
+DwPTS
+TDD
+DL
+UL
+GP
+Subframe()
+Subframe #2
+0 sss
+PSS
+RS.conturl dala
+图3：FDD和TDD的同步信号设计
+对于Type1顿结构，PSS在 slots #0和#10的最后一个OFDM符号上发送，SSS在
+slots#0和#10的倒数第二个OFDM符号上发送；
+对于Type2顿结构，PSS在subframe#1和 subframe #6的第三个OFDM符号上发送，
+SSS在slots#1和#11的最后一个OFDM符号上发送，因此可以通过同步信号的位置检测来
+判定系统为 FDD（Typel）还是TDD（Type2）。
+主同步信号和辅同步信号在相同的某一根天线上发送。
+对于各种不同的系统带宽（5、10、15、20MHz），同步信号的传输带宽相同：占用
+频带中心的1.08MHz带宽。其中信号占用62个子载波，两边各预留5个子载波作为保护
+带。（P-SCH和 S-SCH 的频域位置为直流附近的72个子载波，也即最中心的6 个资源
+块。实际上只占用了62个子载波，其他10个不放同步序列）
+4. TDD 与 FDD 的不同 HARQ 设计
+LTEFDD系统中，HARQ的RTT（Round TripTime，指从数据包发出开始，到达接收方
+后，由接收方返回应答，再到接到应答所经过的时间）固定为8mS，且ACK/NACK位置固
+定，如图4所示。TD-LTE系统中HARQ的设计原理与LTEFDD相同，但是实现过程却比LTE
+FDD复杂，由于TDD上下行链路在时间上是不连续的，UE发送ACK/NACK的位置不固定，而
+且同一种上下行配置的 HARQ 的 RTT 长度都有可能不一样，这样增加了信令交互的过程和设
+备的复杂度。
+
+[[PAGE 68]]
+如图4所示，LTEFDD系统中，UE发送数据后，经过3mS的处理时间，系统发送
+ACK/NACK，UE再经过3mS的处理时间确认，此后，一个完整的HARQ处理过程结束，整个
+过程耗费8mS。在LTETDD系统中，UE发送数据，3mS处理时间后，系统本来应该发送
+ACK/NACK，但是经过3mS处理时间的时隙为上行，必须等到下行才能发送ACK/NACK。系统
+发送ACK/NACK后，UE再经过3mS处理时间确认，整个HARQ处理过程耗费11mS。类似的道
+理，UE如果在第2个时隙发送数据，同样，系统必须等到DL时隙时才能发送ACK/NACK，
+此时，HARQ的一个处理过程耗费1OmS。可见，LTETDD系统HARQ的过程复杂，处理时间
+长度不固定，发送ACK/NACK的时隙也不固定，给系统的设计增加了难度。
+HARQRnund Trip Tine Xms
+PrecssNumbel-?
+ACK
+atadCF
+FDD
+NACK
+INexle B
+Nmle F3
+prexess lime
+process time
+Reund Tnip Tin IIms
+TDD
+UL
+DL
+UL
+DL
+13UL:2DL)
+ACK
+NAK
+RTT-10ms
+DL
+DL
+D.
+NACK
+图4：FDD和TDD的HARQ设计
+五、其他常识：
+单用户多用户MIMO：目前，已经有不少关于点对点的单用户MIMO
+系统的研究。
+在实际应用中，系统往往需要一个基站（BS）同时和多个移动台（MS）进行通信，比如
+最常见的蜂窝系统和无线局域网（WLAN）等。因此，有关点对多点的多用户
+MIMO
+（Multi-userMIMO）系统（如图1所示）的研究也就应运而生，它比单用户
+MIMO
+加复杂。
+NAS:非接入层。所谓接入层的流程和非接入层的流程，实际是从协议栈的角度出发
+的。在协议栈中，RRC和RANAP层及其以下的协议层称为接入层，它们之上的MM、
+SM、CC、SMS等称为非接入层。简单地说，接入层的流程，也就是指无线接入层的设备
+
+[[PAGE 69]]
+RNC、NodeB需要参与处理的流程。非接入层的流程，就是指只有UE和CN需要处理的信
+令流程，无线接入网络RNC、NodeB是不需要处理的。举个形象的比喻，接入层的信令是
+为非接入层的信令交互铺路搭桥的。通过接入层的信令交互，在UE和CN之间建立起了信
+令通路，从而便能进行非接入层信令流程了。
+接入层的流程主要包括PLMN选择、小区选择和无线资源管理流程。无线资源管理流程就
+是RRC层面的流程，包括RRC连接建立流程、UE和CN之间的信令建立流程、RAB建立
+流程、呼叫释放流程、切换流程和SRNS重定位流程。其中切换和SRNS重定位含有跨
+RNC、跨SGSN/MSC的情况，此时还需要SGSN/MSC协助完成。所以从协议栈的层面上来
+说，接入层的流程都是一些底层的流程，通过它们，为上层的信令流程搭建底层的承载。
+按照信令及过程是否与接入有关，Uu接口协议被分为接入层和非接入层，其中接入层包括
+物理层（L1），数据链路层（L2）和网络层（L3）的RRC子层；非接入层包括移动性管理
+层和连接管理层等。
+在UE与UTRAN的RRC连接建立起来以后，UE通过RNC建立与CN的信令连接，就是所
+谓的NAS消息，例如鉴权，业务请求等。UE与CN的交互消息相对于RNC来说都是直传
+消息。而RRC消息都属于接入层的.
+可以理解为接入层：就是无线侧的UU口。非接入层：RNC到核心网的接口IU。
+CDF是累计分布函数（cumulativedistributionfunction）：对连续函数，所有小于等于
+a的值，其出现概率的和为 F(a)=P(x<a)
+链表(Linked list)是一种常见的基础数据结构，是一种线性表，但是并不会按线性的顺
+序存储数据，而是在每一个节点里存到下一个节点的指针(Pointer)。由于不必须按顺序存
+储，链表在插入的时候可以达到O(1)的复杂度，比另一种线性表：顺序表快得多，但是查
+找一个节点或者访问特定编号的节点则需要O(n)的时间，而顺序表相应的时间复杂度分别
+是O(logn)和O(1)。使用链表结构可以克服数组链表需要预先知道数据大小的缺点，链表
+结构可以充分利用计算机内存空间，实现灵活的内存动态管理。但是链表失去了数组随机
+读取的优点，同时链表由于增加了结点的指针域，空间开销比较大。在计算机科学中，链
+表作为一种基础的数据结构可以用来生成其它类型的数据结构。链表通常由一连串节点组
+的位置的链接（"links"）。链表最明显的好处就是，常规数组排列关联项目的方式可能不
+同于这些数据项目在记忆体或磁盘上顺序，数据的存取往往要在不同的排列顺序中转换。
+而链表是一种自我指示数据类型，因为它包含指向另一个相同类型的数据的指针（链
+接）。链表允许插入和移除表上任意位置上的节点，但是不允许随机存取。链表有很多种
+不同的类型：单向链表，双向链表以及循环链表。
+用户面：主要指的是业务方面的，比如数据业务、语言业务等。
+控制面：主要是指的信令方面。
+IMT-Advanced的提案可以分为两大阵容：3GPPLTE-Advanced和IEEE802.16m。
+TD-LTE-Advanced是继TD-SCDMA之后中国提出的具有自主知识产权的新一代移动通信
+技术，它吸纳了TD-SCDMA的主要技术元素，已成为IMT-Advanced的正式候选提案。
+由IEEE自2007年开始制定的802.16m，是现行WiMAX技术标准802.16e的升级版，
+平均下行速率可达100Mbps，约为现行标准的10倍。
+FDD是在分离的两个对称频率信道上进行接收和发送，用保护频段来分离接收和发送
+信道。FDD必须采用成对的频率，依靠频率来区分上下行链路，其单方向的资源在时间上
+是连续的。FDD在支持对称业务时，能充分利用上下行的频谱，但在支持非对称业务时，
+频谱利用率将大大降低。
+
+[[PAGE 70]]
+TDD用时间来分离接收和发送信道。在TDD方式的移动通信系统中，接收和发送使用
+同一频率载波的不同时隙作为信道的承载，其单方向的资源在时间上是不连续的，时间资源
+在两个方向上进行了分配。某个时间段由基站发送信号给移动台，另外的时间由移动台发
+送信号给基站，基站和移动台之间必须协同一致才能顺利工作。
+TD-LTE即 TD-SCDMA Long Term Evolution，宣传是是指 TD-SCDMA 的长期演进。
+实际上没有关系。TD-LTE是TDD版本的LTE的技术，FDDLTE的技术是FDD版本的
+LTE技术。TDD和FDD的差别就是TD采用的是不对称频率是用时间进行双工的，而
+FDD是采用一对频率来进行双工。TD-SCDMA是CDMA技术，TD-LTE是OFDM技术，
+不能对接。
+TD-LTE和FDDLTE。LTE系统同时定义了频分双工(FDD)和时分双工(TDD)两种双
+工方式，并分别设计了FDD和TDD的顿结构。FDD模式下，10ms的无线帧被分为10个
+子顿,每个子帧包含两个时隙，每时隙长0.5mS。TDD模式下，每个10ms无线顿包括2个
+长度为5ms的半顿，每个半顿由4个数据子顿和1个特殊子顿组成，如图2所示。特殊子
+顿包括3个特殊时隙：DwPTS，GP和UpPTS，总长度为1mS。DwPTS和UpPTS的长度可
+配置，DwPTS的长度为3～12个OFDM符号，UpPTS的长度为1～2个OFDM符号，相
+应的GP长度为1～10个OFDM符号。
+在未来系统中，TDD双工方式由于具有可以利用信道的对称特性提高传输效率、不需
+要复杂笨重的频率双工器、可以灵活地分配上下行信道的无线资源、不需要对称频带等优
+点，在LTE以及未来IMT-Advanced系统应用中变得越来越重要。从系统优化后的评估结
+果来看，TD-LTE的系统性能和FDDLTE基本相当，而仅因为TDD系统的上下行之间的
+保护时隙的开销导致性能略有损失。
+HSDPA（High Speed Downlink PacketAccess)高速下行分组接入,是一种移动通信协
+议，亦称为3.5G(3&frac12;G)。该协议在WCDMA下行链路中提供分组数据业务，在一个
+5MHz载波上的传输速率可达8-10Mbit/s（如采用MIMO技术，则可达20Mbit/s）。在具
+体实现中，采用了自适应调制和编码（AMC）、多输入多输出（MIMO）、混合自动重传
+请求（HARQ）、快速调度、快速小区选择等技术。
+BICM：比特交织编码调制。
+TAU。跟踪区域更新(Tracking Area Update，TAU) LTE 还有一个 Tracking Area List 的
+概念。多个Tracking Area组成一个TAL.通常一个eNB下的 TA都会在同一个 TAL里
+面。当UE位于某一个TA的时候，MME吧整个TAL分配给这个UE。UE在TAL里面的
+TA之间移动的时候不需要做 Tracking Area Update。这样可以减少网络的 TAU。这是对 3G
+的RAU的一个改进。
+IMSI /S-TMSI （international mobile subscriber indentity）是存在 SIM卡及 HLR 中
+的，一般在网络中，用IMSI标示用户，而不是MSISDN即139XXXX。TMSI
+（temperatemobile subscriber indentity）是基站(BTS)在呼叫用户时，所用的号码，一般比
+IMSI短。但有的设备商的此项功能没开，直接用IMSI。S-TMSI是在LTE里标识用户的，
+
+[[PAGE 71]]
+相当于P-TMSI在UMTS里的作用。LTE要寻呼UE时，就是通过 S-TMSI在TA范围里
+寻找用户的。
+DRX,DiscontinuousReception，就是UE在一段时间里停止监听PDCCH信道，可以达
+到省电的目的.DRX分为两种,IdleDRX和Connected DRX。Idle状态下,为了能够从
+EUTRAN接收到传呼消息,UE需要监听PDCCH信道中以P-RNTI指示的传呼消息.DRX,是
+指UE不需要连续地监听传呼信道，而只需要监听某些特定的无线顿和子顿（eNB通知UE
+何时解码/监听无线顿，这会显著降低UE功耗。）。在其余的时间内,UE可以关闭其接收
+机,从而达到省电的目的。
+传输块(TB)大小与资源块（RB）。TB是相对于传输层说的，RB是相对于物理层说
+的。TB（传输块）是供物理层处理的MAC子层和物理层之间数据交换的基本单元。RB是
+物理层中的资源单元。LTE中，一个codeword对应一个TB，LTE最多只有两个
+codeword，codewordoandcodewordl，而codeword最大只能取2是因为一个TTI最多有两
+个TB。关键是，对一个UE而言，一个TTI最多只能有两个TB，但这不意味着系统在一
+个TTI内只能传输一个UE的数据；实际上，同一个TTI上可以传输多个UE的数据，而
+TB块对应于 MAC层的PDU（Protocol Data Unit）。每一个TTI,TB 块都从 MAC 层
+传到物理层，在接收侧经过符号级（接收侧解调之前）的处理，在解扰后到达比特级译码
+部分。在发送端，为了满足 Turbo编码的需求，需要将一个大的TB块分成若干Code
+Block（以下简称CB块)，大小从40到6144比特不等。在接收端，在Turbo译码之后，也
+需要先经过码块级联再进行CRC校验，最后将传输数据反馈给高层。
+"A maximum of one MAC PDU can be transmitted per TB per UE",即一个用户一个 TB 最
+多只能传一个MACPDU。我的理解就是因为LTE能够支持2x2MIMOB，它最大允许2个
+TB/UE，也就是说在这种情况下2个TB传一个MACPDU。但是对于一个TB来说，它最
+多就是一个MACPDU，对于只有一个TB的情况下。
+可将一个TB视为一个码字，MAC从上层获得数据量大小，根据数据量大小考量当前
+CQI对应出来的）、TB_SIZE（TB大小，单位为bit）。Itbs、TB_SIZE、使用RB数目三
+者是有对应关系的，表格见TS36.213协议（目前协议规定RB数最大可达110个,TBS是传
+输块大小，是编码前比特数）。
+虚连接与物理连接。分组交换中有虚电路，其通信过程与电路交换类似，建立连接
+后，属于同一呼叫的数据分组均沿着这一条虚电路传送；通信结束后拆除。首先虚连接所
+用的复用为统计时分复用，而电路交换用的物理连接是同步时分复用。其次虚连接是逻
+辑连接，一个物理连接可以有多个逻辑连接（一个DTE允许经其DCE在一条物理的
+DTE----DCE链路上，同时与其他的DTE建立多大4095条虚拟电路）。
+统计时分复用利用公共信道“时隙”的方法与传统的时分复用方法不同，传统的时分复
+用接入的每个终端都固定地分配了一个公共信道的一个时隙，是对号入座的，不管这个终
+端是否正在工作都占用着这个时隙，这就使时隙常常被浪费掉了。因为终端和时隙是“对号
+入座”的，所以它们是“同步”的。而异步时分复用或统计时分复用是把公共信道的时隙实行
+“按需分配”，即只对那些需要传送信息或正在工作的终端才分配给时隙，这样就使所有的
+时隙都能饱满地得到使用，可以使服务的终端数大于时隙的个数，提高了媒质的利用率，
+从而起到了“复用”的作用。统计分析，统计复用可比传统的时分复用提高传输交率2-4
+倍。这种复用的主要特点是动态地分配信道时隙，所以统计复用又可叫做“动态复用”，有
+效提高了信道和设备利用率，所以更适合用于数据传输。
+
+[[PAGE 72]]
+时分复用是指将时间分成若干个时隙（timeslot），每个时隙对应一个信道。如果该
+信道被某特定用户固定使用，如传统电路交换网中，也就是说不管有没有信息传送，该信
+道都不能被其他用户使用，这也是同步时分复用的特征。如果该信道能被多用户复用，则
+为统计时分复用。统计时分复用有两种方式：面向连接的虚电路方式和面向无连接方式。
+如ATM网络就是前者，IP网络就是后者。
+面向连接服务的主要特点有：面向连接服务要经过三个阶段：数据传数前，先建立连
+接，连接建立后再传输数据，数据传送完后，释放连接。面向连接服务，可确保数据传送
+的次序和传输的可靠性。无连接服务的特点是：无连接服务只有传输数据阶段。消除了除
+数据通信外的其它开销。只要发送实体是活跃的，无须接收实体也是活跃的。它的优点是
+灵活方便、迅速，特别适合于传送少量零星的报文，但无连接服务不能防止报文的丢失、
+重复或失序。
+TCP/UDP/IP。TCP和UDP都是传输层的协议，IP是网络层的协议，TCP
+和UDP都在网络层协议（如IP）的基础上工作地。IP打招呼的方式呢：是面向
+无连接的。TCP打招呼的方式呢：是面向连接的，三次握手验证：你跟对方说
+HI，对方跟你说HI，然后你跟对方建立起连接，这就叫面向连接的服务。主机
+是端到端联系的，你可以这样去理解：IP跟对端的IP打招呼，TCP跟对端的
+TCP打招呼。TCP向下封装在IP包里面，通过IP包传输到对端，IP跟对端的
+IP打上招呼了，就将TCP的报文解封装，并交接上一层的TCP，这样TCP也跟
+对端的TCP打上招呼了。
+UDP是UserDatagramProtocol的简称，中文名是用户数据包协议，是OSI参考模型中
+一种无连接的传输层协议，由于无连接，时延短，适合语音业务。而TCP是面向连接
+的。
+SDU/PDU:SDU是指服务数据单元，上层下来的都叫SDU，比如说，RLC的数据，到
+了MAC，就是MACSDU；PDCP的到了RLC，就是RLCSDU。PDU是指协议数据单
+元，本层出口到下层的都叫PDU，比如说，RLC处理过的数据，要到MAC去，对于RLC
+来讲，就是RLCPDU。
+RLC协议中，上层的PDU在下层成为了下层的SDU，发生了分段/重组，级联，填充
+的过程。PDU是SDU在RLC的承载，SDU被分段或者级联，然后填充到PDU中，即
+SDU封装后就是PDU协议数据单元PDU（ProtocolDataUnit）是指对等层次之间传递的
+数据单位。
+协议数据单元(ProtocolDataUnit）物理层的PDU是数据位（bit），数据链路层的
+PDU是数据帧（frame），网络层的PDU是数据包（packet），传输层的PDU是数据
+段（segment），其他更高层次的PDU是数据（data）
+信道模型来源于对多径效应的估计，在信道模型中列出了不同路径的平均延时和功率
+差别。在TS25.943中，3GPP定义了各种信道模型，目前常用的有TU3，TU50，RA3，
+RA50等信道模型。其中，TU即城区TypicalUrban，RA即农村RuralArea，而3和50
+代表运动的速度。ITU也定义了信道模型，可以与3GPP联系起来，其中PedB和VehA等
+价于TU，PedA等价于RA。城市与农村信道模型的差别在于多径中LOS视距是否占主导
+地位，显然城市是非视距为主的。信道模型决定了Eb/No参数，此外，信道模型也决定了
+F和正交因子等参数的取值。从使用的角度看，每种信道模型代表不同无线网络参数的集
+合。
+
+[[PAGE 73]]
+信道类型TU6:TU表示TypicalUrban环境，它是COST207信道模型中的一种，即典
+型城市信道，但6不是表示速度6km/h，而是对应的6径模型，与其中的12径模型区分开
+来。
+SAIC:单天线干扰消除技术
+MUROS:Multi-userreuseoneslot多用户复用单时隙。多用户时隙复用的方法包括：接收
+多个用户上报的功率控制参数；根据所述功率控制参数获取功率调整因子，并根据所述功
+率调整因子调整所述多个用户的发送功率；根据调整后的发送功率复用多个用户的发射信
+号。
+CQI/PMI/RI的报告:CQI（ChannelQuality Indication）、PMI（Precoding Matrix
+Indicator）和RI（RankIndication）。RI是矩阵的秩。可以理解为空口有多少个独立的信
+道。在spatialmultipelxing中layer的数目等于rank的上报值。当然最后用多少rank还是由
+MAC来决定。PMI就是UE推荐的预编码的值。怎么用还是MAC来决定的。可以看看
+DCI Format2的格式。对PMI的一些规定。
+IPv6.与IPv4相比，IPv6主要有如下一些优势。第一，明显地扩大了地址空间。IPv6
+采用128位地址长度，几乎可以不受限制地提供IP地址，从而确保了端到端连接的可能
+性。第二，提高了网络的整体吞吐量。由于IPv6的数据包可以远远超过64k字节，应用程
+序可以利用最大传输单元（MTU），获得更快、更可靠的数据传输，同时在设计上改进了
+选路结构，采用简化的报头定长结构和更合理的分段方法，使路由器加快数据包处理速
+度，提高了转发效率，从而提高网络的整体吞吐量。第三，使得整个服务质量得到很大改
+善。报头中的业务级别和流标记通过路由器的配置可以实现优先级控制和QoS保障，从而
+极大改善了IPv6的服务质量。第四，安全性有了更好的保证。采用IPSec可以为上层协议
+和应用提供有效的端到端安全保证，能提高在路由器水平上的安全性。第五，支持即插即
+用和移动性。设备接入网络时通过自动配置可自动获取IP地址和必要的参数，实现即插即
+用，简化了网络管理，易于支持移动节点。而且IPv6不仅从IPv4中借鉴了许多概念和术
+语，它还定义了许多移动IPv6所需的新功能。第六，更好地实现了多播功能。在IPv6的
+多播功能中增加了“范围”和“标志”，限定了路由范围和可以区分永久性与临时性地址，更
+有利于多播功能的实现。

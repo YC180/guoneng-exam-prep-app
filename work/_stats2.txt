@@ -1,0 +1,43 @@
+﻿
+
+file          : 4-1-EPI综合能力题库----常识题精选600道_.txt
+ans_colon     : 600
+jiexi_bracket : 600
+jiexi_colon   : 602
+paren_num     : 1
+di_num        : 0
+line_only_num : 0
+any_num_dot   : 54
+qmark         : 413
+blank         : 8
+newline_count : 6824
+pages         : 140
+
+file          : 4-2-EPI综合能力题库----数字推理题精选300道详解_.txt
+ans_colon     : 334
+jiexi_bracket : 334
+jiexi_colon   : 334
+paren_num     : 1
+di_num        : 0
+line_only_num : 0
+any_num_dot   : 442
+qmark         : 481
+blank         : 0
+newline_count : 2965
+pages         : 61
+
+file          : 4-3-EPI综合能力题库----数学运算、应用题精选400道详解_.txt
+ans_colon     : 409
+jiexi_bracket : 408
+jiexi_colon   : 406
+paren_num     : 0
+di_num        : 0
+line_only_num : 0
+any_num_dot   : 656
+qmark         : 313
+blank         : 0
+newline_count : 4557
+pages         : 94
+
+
+

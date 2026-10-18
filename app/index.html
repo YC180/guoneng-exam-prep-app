@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="国家能源集团招聘考试备考学习 APP：题库浏览、专项练习、错题复习、模拟考试、学习统计，支持离线使用与数据导出。">
+<meta name="theme-color" content="#c8102e">
+<title>国家能源集团备考学习</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23c8102e'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E%E5%9B%BD%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <h1 id="ttl">国家能源集团备考学习<span class="sub" id="ttlSub"></span></h1>
+    <button class="btn-sm btn-ghost" id="btnTheme" title="切换深色模式">深色</button>
+  </header>
+
+  <main id="view" aria-live="polite"></main>
+
+  <nav class="nav" id="nav" aria-label="主导航">
+    <button data-go="home"><span class="ic">🏠</span>首页</button>
+    <button data-go="bank"><span class="ic">📚</span>题库</button>
+    <button data-go="practice"><span class="ic">✍️</span>练习</button>
+    <button data-go="wrong"><span class="ic">🔁</span>错题本</button>
+    <button data-go="exam"><span class="ic">⏱️</span>模拟考</button>
+    <button data-go="stats"><span class="ic">📈</span>统计</button>
+    <button data-go="more"><span class="ic">⚙️</span>资料与设置</button>
+  </nav>
+</div>
+
+<div id="toastHost"></div>
+
+<!-- 数据：题库与已核实知识点（普通 script，file:// 直接双击亦可加载） -->
+<script src="data/questions.js"></script>
+<script src="data/knowledge.js"></script>
+
+<!-- 应用逻辑 -->
+<script src="js/store.js"></script>
+<script src="js/bank.js"></script>
+<script src="js/practice.js"></script>
+<script src="js/exam.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/io.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

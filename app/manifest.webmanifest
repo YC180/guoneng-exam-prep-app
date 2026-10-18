@@ -1,0 +1,25 @@
+{
+  "name": "国家能源集团备考学习",
+  "short_name": "国能备考",
+  "description": "国家能源集团招聘笔试备考：题库练习、错题本、模拟考、统计与已核实知识点。全部数据保存在本机，可离线使用。",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "./icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "今日学习", "url": "./index.html#practice" },
+    { "name": "错题本", "url": "./index.html#wrong" },
+    { "name": "模拟考", "url": "./index.html#exam" }
+  ]
+}

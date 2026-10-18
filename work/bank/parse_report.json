@@ -1,0 +1,892 @@
+[
+ {
+  "source": "4-1-EPI综合能力题库----常识题精选600道_.txt",
+  "mode": "unnumbered",
+  "parsed": 599,
+  "kept": 599,
+  "verified": 599,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "4-2-EPI综合能力题库----数字推理题精选300道详解_.txt",
+  "mode": "unnumbered",
+  "parsed": 334,
+  "kept": 334,
+  "verified": 334,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "4-3-EPI综合能力题库----数学运算、应用题精选400道详解_.txt",
+  "mode": "unnumbered",
+  "parsed": 407,
+  "kept": 407,
+  "verified": 407,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "4-4-EPI综合能力题库----言语理解与表达试题精选350道详解_.txt",
+  "mode": "unnumbered",
+  "parsed": 386,
+  "kept": 386,
+  "verified": 386,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "4-5-EPI综合能力题库----图形推理习题精选300道详解_.txt",
+  "mode": "unnumbered",
+  "parsed": 29,
+  "kept": 29,
+  "verified": 29,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "4-6-EPI综合能力题库----逻辑推理题精选300道详解_.txt",
+  "mode": "unnumbered",
+  "parsed": 344,
+  "kept": 344,
+  "verified": 344,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "4-7-EPI综合能力题库----资料分析题库+解析_.txt",
+  "mode": "unnumbered",
+  "parsed": 128,
+  "kept": 128,
+  "verified": 127,
+  "needs_review": 0,
+  "missing": 1,
+  "status": "ok"
+ },
+ {
+  "source": "EPI综合能力500题\\EPI综合能力测试-判断推理-试题.txt",
+  "mode": "pair",
+  "parsed": 100,
+  "kept": 100,
+  "verified": 100,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "EPI综合能力500题\\EPI综合能力测试-思维策略-试题.txt",
+  "mode": "pair",
+  "parsed": 100,
+  "kept": 100,
+  "verified": 97,
+  "needs_review": 3,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "EPI综合能力500题\\EPI综合能力测试-数量关系-试题.txt",
+  "mode": "pair",
+  "parsed": 100,
+  "kept": 100,
+  "verified": 97,
+  "needs_review": 3,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "EPI综合能力500题\\EPI综合能力测试-言语理解-试题.txt",
+  "mode": "pair",
+  "parsed": 100,
+  "kept": 100,
+  "verified": 100,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "EPI综合能力500题\\EPI综合能力测试-资料分析-试题.txt",
+  "mode": "pair",
+  "parsed": 65,
+  "kept": 65,
+  "verified": 65,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "EPI综合能力500题\\常识200道试题.txt",
+  "mode": "pair",
+  "parsed": 200,
+  "kept": 200,
+  "verified": 199,
+  "needs_review": 0,
+  "missing": 1,
+  "status": "ok"
+ },
+ {
+  "source": "国家能源集团企业文化试题.txt",
+  "mode": "pair",
+  "parsed": 35,
+  "kept": 35,
+  "verified": 34,
+  "needs_review": 1,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "国家能源集团笔试模拟卷（一）.txt",
+  "mode": "pair",
+  "parsed": 60,
+  "kept": 60,
+  "verified": 60,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "国家能源集团笔试模拟卷（二）.txt",
+  "mode": "pair",
+  "parsed": 60,
+  "kept": 60,
+  "verified": 60,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "2025国家能源校招笔试真题（不含英语）完整版答案及解释.txt",
+  "mode": "numbered",
+  "parsed": 89,
+  "kept": 89,
+  "verified": 89,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "2025国家能源校招笔试真题（含英语）完整版答案及解释.txt",
+  "mode": "numbered",
+  "parsed": 65,
+  "kept": 65,
+  "verified": 65,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "2024国家能源校招笔试真题及参考答案1.txt",
+  "mode": "numbered",
+  "parsed": 96,
+  "kept": 96,
+  "verified": 95,
+  "needs_review": 1,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "2024国家能源校招笔试真题及参考答案2.txt",
+  "mode": "numbered",
+  "parsed": 99,
+  "kept": 99,
+  "verified": 99,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "2023国家能源集团夏招招聘在线笔试真题及答案解析.txt",
+  "mode": "numbered",
+  "parsed": 86,
+  "kept": 86,
+  "verified": 80,
+  "needs_review": 2,
+  "missing": 4,
+  "status": "ok"
+ },
+ {
+  "source": "2023国家能源集团秋李招聘在线笔试完整真题及答系.txt",
+  "mode": "numbered",
+  "parsed": 66,
+  "kept": 66,
+  "verified": 58,
+  "needs_review": 1,
+  "missing": 7,
+  "status": "ok"
+ },
+ {
+  "source": "2012年国电集团招聘笔试试题及答案.txt",
+  "mode": "numbered",
+  "parsed": 10,
+  "kept": 10,
+  "verified": 10,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "2025国家能源集团模拟笔试试题和答案解析（一）.txt",
+  "mode": "numbered",
+  "parsed": 30,
+  "kept": 30,
+  "verified": 29,
+  "needs_review": 1,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "2025国家能源集团模拟笔试试题和答案解析（二）.txt",
+  "mode": "numbered",
+  "parsed": 33,
+  "kept": 33,
+  "verified": 31,
+  "needs_review": 0,
+  "missing": 2,
+  "status": "ok"
+ },
+ {
+  "source": "2025国家能源集团模拟笔试试题和答案解析（三）.txt",
+  "mode": "numbered",
+  "parsed": 30,
+  "kept": 30,
+  "verified": 29,
+  "needs_review": 0,
+  "missing": 1,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2026年时政+试题\\2026年1月时政试题179道.txt",
+  "mode": "inline",
+  "parsed": 179,
+  "kept": 179,
+  "verified": 179,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2026年时政+试题\\2026年2月时政试题汇总.txt",
+  "mode": "inline",
+  "parsed": 151,
+  "kept": 151,
+  "verified": 151,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2026年时政+试题\\2026年3月时政试题汇总.txt",
+  "mode": "inline",
+  "parsed": 175,
+  "kept": 175,
+  "verified": 175,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2026年时政+试题\\2026年4月时政试题165道.txt",
+  "mode": "inline",
+  "parsed": 165,
+  "kept": 165,
+  "verified": 165,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2025年每月时政热点配套押题\\2025年9月时政试题190道.txt",
+  "mode": "inline",
+  "parsed": 190,
+  "kept": 190,
+  "verified": 190,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2025年每月时政热点配套押题\\2025年10月时政试题汇总.txt",
+  "mode": "inline",
+  "parsed": 175,
+  "kept": 175,
+  "verified": 175,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2025年每月时政热点配套押题\\2025年11月时政试题186道汇总.txt",
+  "mode": "inline",
+  "parsed": 186,
+  "kept": 186,
+  "verified": 186,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2025年每月时政热点配套押题\\2025年12月时政试题汇总.txt",
+  "mode": "inline",
+  "parsed": 191,
+  "kept": 191,
+  "verified": 191,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\二十大相关资料\\二十大试题（240题）.txt",
+  "mode": "inline",
+  "parsed": 140,
+  "kept": 140,
+  "verified": 140,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\二十大相关资料\\各考试中党的二十大相关试题汇总（一）（50题）.txt",
+  "mode": "numbered",
+  "parsed": 50,
+  "kept": 50,
+  "verified": 48,
+  "needs_review": 1,
+  "missing": 1,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\二十大相关资料\\各考试中党的二十大相关试题汇总（二）（66题）.txt",
+  "mode": "numbered",
+  "parsed": 66,
+  "kept": 66,
+  "verified": 66,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\二十大相关资料\\各考试中党的二十大相关试题汇总（三）（130题）.txt",
+  "mode": "numbered",
+  "parsed": 130,
+  "kept": 130,
+  "verified": 130,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\十五五规划建议考点速记\\（试题）关于《中共中央关于制定国民经济和社会发展第十五个五年规划的建议》的说明（70题）-.txt",
+  "mode": "inline",
+  "parsed": 70,
+  "kept": 70,
+  "verified": 70,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\二十届3中全会\\二十届三中全会（考点+40题）.txt",
+  "mode": "inline",
+  "parsed": 40,
+  "kept": 40,
+  "verified": 40,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\2025年上合组织峰会考点速记\\上合组织试题\\试题44道  习近平在上海合作组织成员国元首理事会第二十五次会议上的讲话.txt",
+  "mode": "inline",
+  "parsed": 44,
+  "kept": 44,
+  "verified": 44,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\2025年上合组织峰会考点速记\\上合组织试题\\试题53道  习近平在“上海合作组织+”会议上的讲话.txt",
+  "mode": "inline",
+  "parsed": 53,
+  "kept": 53,
+  "verified": 53,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\中央经济工作会议时政\\中央经济工作会议（考点+划重点+32题）.txt",
+  "mode": "inline",
+  "parsed": 32,
+  "kept": 32,
+  "verified": 32,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年12月\\24年1月-24年12月时政要问及1950题及答案（24年12月更新完）.txt",
+  "mode": "inline",
+  "parsed": 1584,
+  "kept": 1584,
+  "verified": 1546,
+  "needs_review": 1,
+  "missing": 37,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2025年每月时政热点配套押题\\1月押题\\2025年1月时事政治模拟题(带答案).txt",
+  "mode": "inline",
+  "parsed": 124,
+  "kept": 124,
+  "verified": 124,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2025年每月时政热点配套押题\\2月押题\\2025年2月时事政治模拟题(带答案).txt",
+  "mode": "inline",
+  "parsed": 115,
+  "kept": 115,
+  "verified": 115,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2025年每月时政热点配套押题\\3月押题\\2025年3月时事政治模拟题(带答案).txt",
+  "mode": "inline",
+  "parsed": 154,
+  "kept": 154,
+  "verified": 154,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2025年每月时政热点配套押题\\4月押题\\2025年4月时事政治模拟题(带答案).txt",
+  "mode": "inline",
+  "parsed": 137,
+  "kept": 137,
+  "verified": 136,
+  "needs_review": 1,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2025年每月时政热点配套押题\\5月押题\\2025年5月时事政治模拟题(带答案).txt",
+  "mode": "inline",
+  "parsed": 137,
+  "kept": 137,
+  "verified": 137,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2025年每月时政热点配套押题\\7月押题\\2025年7月时政183题.txt",
+  "mode": "inline",
+  "parsed": 183,
+  "kept": 183,
+  "verified": 183,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\24-26年时政\\2025年每月时政热点配套押题\\8月押题\\2025年8月时政试题173道.txt",
+  "mode": "inline",
+  "parsed": 172,
+  "kept": 172,
+  "verified": 172,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\2025年中央一号文件\\2025年中央一号文件（全文+划重点+58题）.txt",
+  "mode": "inline",
+  "parsed": 58,
+  "kept": 58,
+  "verified": 57,
+  "needs_review": 0,
+  "missing": 1,
+  "status": "ok"
+ },
+ {
+  "source": "【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\2026年\\试题21道  2026.2.27中央政治局会议.txt",
+  "mode": "inline",
+  "parsed": 21,
+  "kept": 21,
+  "verified": 21,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "2021年国家能源集团春季校园招聘笔试题-学生.txt",
+  "mode": "pair",
+  "parsed": 33,
+  "kept": 33,
+  "verified": 32,
+  "needs_review": 0,
+  "missing": 1,
+  "status": "ok"
+ },
+ {
+  "source": "2022年国家能源集团秋季校园招聘笔试题-学生.txt",
+  "mode": "pair",
+  "parsed": 87,
+  "kept": 87,
+  "verified": 87,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "2023年国家能源集团秋季校园招聘笔试题-学生.txt",
+  "mode": "pair",
+  "parsed": 82,
+  "kept": 82,
+  "verified": 81,
+  "needs_review": 0,
+  "missing": 1,
+  "status": "ok"
+ },
+ {
+  "source": "国家能源秋招常考易错1000题-判断推理-学生版.txt",
+  "mode": "pair",
+  "parsed": 248,
+  "kept": 248,
+  "verified": 248,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "国家能源秋招常考易错1000题-数量关系-学生版.txt",
+  "mode": "pair",
+  "parsed": 249,
+  "kept": 249,
+  "verified": 242,
+  "needs_review": 7,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "国家能源秋招常考易错1000题-言语理解-学生版.txt",
+  "mode": "pair",
+  "parsed": 250,
+  "kept": 250,
+  "verified": 250,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "国家能源秋招常考易错1000题-资料分析-学生版.txt",
+  "mode": "pair_strict",
+  "parsed": 248,
+  "kept": 248,
+  "verified": 248,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "3、【行测知识】国家能源行测部分分题型刷题提分题库\\数字推理350题及答案详解.txt",
+  "mode": "ocr",
+  "parsed": 341,
+  "kept": 341,
+  "verified": 336,
+  "needs_review": 5,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "3、【行测知识】国家能源行测部分分题型刷题提分题库\\数学运算&思维策略400题及答案详解.txt",
+  "mode": "ocr",
+  "parsed": 429,
+  "kept": 429,
+  "verified": 429,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "3、【行测知识】国家能源行测部分分题型刷题提分题库\\言语理解400题及答案详解.txt",
+  "mode": "ocr",
+  "parsed": 385,
+  "kept": 385,
+  "verified": 384,
+  "needs_review": 1,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "3、【行测知识】国家能源行测部分分题型刷题提分题库\\资料分析图表分析题汇总及答案详解.txt",
+  "mode": "ocr",
+  "parsed": 214,
+  "kept": 214,
+  "verified": 214,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "3、【行测知识】国家能源行测部分分题型刷题提分题库\\逻辑推理精选400题及答案详解.txt",
+  "mode": "ocr",
+  "parsed": 334,
+  "kept": 334,
+  "verified": 314,
+  "needs_review": 20,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "6、【国家能源集团招聘】12-25年笔试真题\\2014国电集团笔试试题真题及答案解析.txt",
+  "mode": "numbered",
+  "parsed": 20,
+  "kept": 20,
+  "verified": 12,
+  "needs_review": 6,
+  "missing": 2,
+  "status": "ok"
+ },
+ {
+  "source": "6、【国家能源集团招聘】12-25年笔试真题\\2015国电集团笔试试题真题及答案解析.txt",
+  "mode": "numbered",
+  "parsed": 49,
+  "kept": 49,
+  "verified": 42,
+  "needs_review": 0,
+  "missing": 7,
+  "status": "ok"
+ },
+ {
+  "source": "6、【国家能源集团招聘】12-25年笔试真题\\2016年国电集团招聘笔试真题及答案解析.txt",
+  "mode": "ocr",
+  "parsed": 50,
+  "kept": 50,
+  "verified": 49,
+  "needs_review": 1,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "6、【国家能源集团招聘】12-25年笔试真题\\2017国电集团招聘笔试真题及答案解析.txt",
+  "mode": "ocr",
+  "parsed": 49,
+  "kept": 49,
+  "verified": 48,
+  "needs_review": 1,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "6、【国家能源集团招聘】12-25年笔试真题\\2022国家能源集团招聘在线笔试完整真题及答案.txt",
+  "mode": "ocr",
+  "parsed": 0,
+  "kept": 0,
+  "verified": 0,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年03月\\2024年3月时政热点试题及答案.txt",
+  "mode": "ocr_sect",
+  "parsed": 136,
+  "kept": 136,
+  "verified": 113,
+  "needs_review": 23,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年04月\\2024年4时政热点试题及答案.txt",
+  "mode": "ocr_sect",
+  "parsed": 124,
+  "kept": 124,
+  "verified": 90,
+  "needs_review": 33,
+  "missing": 1,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年05月\\2024年5月时政热点试题及答案.txt",
+  "mode": "ocr_sect",
+  "parsed": 131,
+  "kept": 131,
+  "verified": 103,
+  "needs_review": 28,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年05月\\2024年5月时政热点（国内+国际）.txt",
+  "mode": "ocr",
+  "parsed": 0,
+  "kept": 0,
+  "verified": 0,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年06月\\2024年6月时政热点试题及答案.txt",
+  "mode": "ocr_sect",
+  "parsed": 127,
+  "kept": 127,
+  "verified": 110,
+  "needs_review": 17,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年06月\\2024年6月时政热点（国内+国际）.txt",
+  "mode": "ocr",
+  "parsed": 0,
+  "kept": 0,
+  "verified": 0,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年07月\\2024年7月时政热点试题及答案.txt",
+  "mode": "ocr_sect",
+  "parsed": 148,
+  "kept": 148,
+  "verified": 140,
+  "needs_review": 8,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年07月\\2024年7月时政热点（国内+国际）.txt",
+  "mode": "ocr",
+  "parsed": 0,
+  "kept": 0,
+  "verified": 0,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年08月\\2024年8月时政热点试题及答案.txt",
+  "mode": "ocr_sect",
+  "parsed": 124,
+  "kept": 124,
+  "verified": 97,
+  "needs_review": 26,
+  "missing": 1,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年08月\\2024年8月时政热点（国内+国际）.txt",
+  "mode": "ocr",
+  "parsed": 0,
+  "kept": 0,
+  "verified": 0,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年09月\\2024年09月时政热点试题及答案.txt",
+  "mode": "ocr_sect",
+  "parsed": 136,
+  "kept": 136,
+  "verified": 109,
+  "needs_review": 27,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年09月\\2024年09月时政热点（国内+国际）.txt",
+  "mode": "ocr",
+  "parsed": 0,
+  "kept": 0,
+  "verified": 0,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年10月\\2024年10月时政热点试题及答案.txt",
+  "mode": "ocr_sect",
+  "parsed": 109,
+  "kept": 109,
+  "verified": 95,
+  "needs_review": 14,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年10月\\2024年10月时政热点（国内+国际.txt",
+  "mode": "ocr",
+  "parsed": 0,
+  "kept": 0,
+  "verified": 0,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\24-26年时政\\2024年时政热点+试题\\24年11月\\2024年11月时事政治模拟题及答案（160题）.txt",
+  "mode": "ocr",
+  "parsed": 143,
+  "kept": 143,
+  "verified": 138,
+  "needs_review": 5,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【2025.4-2026.3】重要讲话考点预测300题（不定期更新，勿催）\\25年-26年重要讲话考点预测300题（更新至26年3月底）.txt",
+  "mode": "ocr",
+  "parsed": 276,
+  "kept": 276,
+  "verified": 246,
+  "needs_review": 30,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\中央经济工作会议时政\\考点速记  2024.12中央经济工作会议.txt",
+  "mode": "ocr",
+  "parsed": 0,
+  "kept": 0,
+  "verified": 0,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\重要讲话包\\❤【月更】24年-25年重要讲话考点预测400题（更新至25年7月底）.txt",
+  "mode": "ocr",
+  "parsed": 289,
+  "kept": 289,
+  "verified": 262,
+  "needs_review": 27,
+  "missing": 0,
+  "status": "ok"
+ },
+ {
+  "source": "8、时政【全年持续更新】\\【全国时政】全国时政热点（已更4月）\\【重要会议】2025重要时政+文章考点\\重要讲话包\\考点速记  2025.9.29中共中央政治局会议.txt",
+  "mode": "ocr",
+  "parsed": 0,
+  "kept": 0,
+  "verified": 0,
+  "needs_review": 0,
+  "missing": 0,
+  "status": "ok"
+ }
+]

@@ -1,0 +1,55 @@
+﻿
+
+file     : 4-1-EPI综合能力题库----常识题精选600道_.txt
+bytes    : 546721
+chars    : 213383
+lines_nl : 6824
+cjk      : 147023
+fffd     : 0
+qnum_bol : 2
+pages    : 140
+ans      : 746
+jiexi    : 1202
+opt_A    : 600
+opt_B    : 601
+opt_C    : 602
+opt_D    : 602
+qnum_min : 4
+qnum_max : 49
+
+file     : 4-2-EPI综合能力题库----数字推理题精选300道详解_.txt
+bytes    : 122906
+chars    : 64320
+lines_nl : 2965
+cjk      : 20733
+fffd     : 0
+qnum_bol : 20
+pages    : 61
+ans      : 663
+jiexi    : 670
+opt_A    : 335
+opt_B    : 335
+opt_C    : 334
+opt_D    : 334
+qnum_min : 0
+qnum_max : 243
+
+file     : 4-3-EPI综合能力题库----数学运算、应用题精选400道详解_.txt
+bytes    : 294602
+chars    : 135135
+lines_nl : 4557
+cjk      : 67826
+fffd     : 0
+qnum_bol : 13
+pages    : 94
+ans      : 805
+jiexi    : 831
+opt_A    : 415
+opt_B    : 410
+opt_C    : 409
+opt_D    : 409
+qnum_min : 0
+qnum_max : 1074
+
+
+
