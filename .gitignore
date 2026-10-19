@@ -25,6 +25,11 @@ work/_tmp*/
 work/ocr/*.log
 work/**/*.log
 
+# Android 构建中间产物（由 android/build_apk.py 生成；签名密钥 keystore/ 需要入库，
+# 以便后续版本能用同一签名覆盖安装）
+android/build/
+android/*.apk
+
 # ---------------------------------------------------------------- 系统文件
 Thumbs.db
 desktop.ini

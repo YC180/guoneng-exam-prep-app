@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
 
-const APP = 'D:\\DOWNLOADS\\app';
+const APP = process.argv[2] || process.env.APPTEST_ROOT || 'D:\\DOWNLOADS\\app';
 const SCRIPTS = [
   'data/questions.js', 'data/knowledge.js',
   'js/store.js', 'js/bank.js', 'js/practice.js', 'js/exam.js',

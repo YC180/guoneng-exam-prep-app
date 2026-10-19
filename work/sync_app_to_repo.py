@@ -1,17 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""把交付目录 `D:\\DOWNLOADS\\app` 同步进仓库内的真实目录 `D:\\app project\\app`。
+"""把交付目录 `D:\\DOWNLOADS\\app` 同步进仓库内的两处**真实目录**：
+
+  1. `D:\\app project\\app`               —— 版本库里的应用副本
+  2. `D:\\app project\\android\\assets\\www` —— 打进 APK 的资产目录
 
 为什么需要：`D:\\app project\\app` 原本是指向交付目录的**目录联接（junction）**，
 Git 不会跟随联接，仓库里会变成空条目或指针，所以仓库需要一份**真实**的应用目录。
-交付路径 `D:\\DOWNLOADS\\app` 保持不变（使用者双击即用），仓库内的 `app\\` 是它的镜像。
+交付路径 `D:\\DOWNLOADS\\app` 保持不变（使用者双击即用），以上两处都是它的镜像。
 
 安全护栏（必须全部通过才动任何文件）：
-  1. 目标确实是 junction，且其 Target 必须等于交付目录 —— 否则中止；
+  1. 目标若为 junction，其 Target 必须等于交付目录 —— 否则中止；
   2. 移除 junction 只能用 `cmd /c rmdir`（**绝不用递归删除**：递归删除会穿透联接、
      把交付目录的内容真的删掉）；移除后必须确认它已不是联接、且与交付目录 realpath 不同；
-  3. 删除多余文件只在 `app\\` 内部、且仅删交付目录里不存在的项；
-  4. 镜像前后统计交付目录文件数，若镜像结果与交付目录清单不一致则报错。
+  3. 删除多余文件只在目标目录内部、且仅删交付目录里不存在的项；
+  4. 镜像后统计目标文件清单，与交付目录清单不一致则报错。
 """
 import filecmp
 import os
@@ -19,9 +22,12 @@ import shutil
 import subprocess
 import sys
 
-REPO_APP = r"D:\app project\app"
 DELIVER = r"D:\DOWNLOADS\app"
-
+# APK 构建直接读仓库内的应用副本（再打成 ASCII 名的 assets/www.zip），
+# 因此只需同步这一处即可，无需在 android 下再留一份拷贝。
+TARGETS = [
+    r"D:\app project\app",
+]
 
 IO_REPARSE_TAG_MOUNT_POINT = 0xA0000003
 
@@ -47,39 +53,39 @@ def is_junction(path):
         return False
 
 
-def assert_safe():
+def assert_safe(target):
     if not os.path.isdir(DELIVER):
         raise SystemExit(f"❌ 交付目录不存在：{DELIVER}")
-    if os.path.exists(REPO_APP):
-        if is_junction(REPO_APP):
-            tgt = os.path.realpath(REPO_APP)
+    if os.path.exists(target):
+        if is_junction(target):
+            tgt = os.path.realpath(target)
             if os.path.normcase(tgt) != os.path.normcase(os.path.realpath(DELIVER)):
                 raise SystemExit(f"❌ 联接指向的不是交付目录：{tgt} ≠ {DELIVER}，已中止")
-            print(f"  检测到联接：{REPO_APP} → {tgt}")
+            print(f"  检测到联接：{target} → {tgt}")
         else:
-            # 已经是真实目录：确认它不是交付目录本身（防同一路径双向覆盖）
-            if os.path.normcase(os.path.realpath(REPO_APP)) == os.path.normcase(os.path.realpath(DELIVER)):
-                raise SystemExit("❌ 仓库 app 是真实目录且与交付目录同一路径，已中止")
-            print(f"  已是真实目录：{REPO_APP}")
+            if os.path.normcase(os.path.realpath(target)) == \
+                    os.path.normcase(os.path.realpath(DELIVER)):
+                raise SystemExit(f"❌ 目标与交付目录同一路径，已中止：{target}")
+            print(f"  已是真实目录：{target}")
 
 
-def drop_junction():
-    if is_junction(REPO_APP):
+def drop_junction(target):
+    if is_junction(target):
         # 只能用 rmdir 移除联接本身（Remove-Item -Recurse 会删掉目标内容）
-        r = subprocess.run(["cmd", "/c", "rmdir", REPO_APP], capture_output=True, text=True)
+        r = subprocess.run(["cmd", "/c", "rmdir", target], capture_output=True, text=True)
         if r.returncode != 0:
             raise SystemExit(f"❌ 移除联接失败：{r.stderr.strip() or r.stdout.strip()}")
         print("  已移除联接（未触碰交付目录内容）")
-    if is_junction(REPO_APP):
+    if is_junction(target):
         raise SystemExit("❌ 联接仍存在，已中止")
-    if os.path.isdir(REPO_APP) and os.path.normcase(os.path.realpath(REPO_APP)) == \
+    if os.path.isdir(target) and os.path.normcase(os.path.realpath(target)) == \
             os.path.normcase(os.path.realpath(DELIVER)):
         raise SystemExit("❌ realpath 相同，拒绝操作")
 
 
-def mirror():
-    """单向镜像：交付目录 → 仓库 app（复制新增/变更，删除多余）。"""
-    os.makedirs(REPO_APP, exist_ok=True)
+def mirror(target):
+    """单向镜像：交付目录 → 目标（复制新增/变更，删除多余）。"""
+    os.makedirs(target, exist_ok=True)
     added = updated = removed = kept = 0
 
     deliver_files = {}
@@ -88,9 +94,8 @@ def mirror():
             p = os.path.join(root, f)
             deliver_files[os.path.relpath(p, DELIVER)] = p
 
-    # 复制 / 更新
     for rel, src in deliver_files.items():
-        dst = os.path.join(REPO_APP, rel)
+        dst = os.path.join(target, rel)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         if not os.path.exists(dst):
             shutil.copy2(src, dst)
@@ -101,41 +106,53 @@ def mirror():
             shutil.copy2(src, dst)
             updated += 1
 
-    # 删除仓库里多出来的文件/空目录（严格限定在 REPO_APP 内部）
     repo_files = []
-    for root, _dirs, files in os.walk(REPO_APP):
+    for root, _dirs, files in os.walk(target):
         for f in files:
-            repo_files.append(os.path.relpath(os.path.join(root, f), REPO_APP))
+            repo_files.append(os.path.relpath(os.path.join(root, f), target))
     for rel in repo_files:
         if rel not in deliver_files:
-            os.remove(os.path.join(REPO_APP, rel))
+            os.remove(os.path.join(target, rel))
             removed += 1
-    for root, dirs, files in os.walk(REPO_APP, topdown=False):
+    for root, dirs, _files in os.walk(target, topdown=False):
         for d in dirs:
             p = os.path.join(root, d)
             if not os.listdir(p):
                 os.rmdir(p)
+    return added, updated, removed, kept
 
-    return added, updated, removed, kept, len(deliver_files)
+
+def verify_against_deliver(target):
+    got = sorted(os.path.relpath(os.path.join(r, f), target)
+                 for r, _d, fs in os.walk(target) for f in fs)
+    want = sorted(os.path.relpath(os.path.join(r, f), DELIVER)
+                  for r, _d, fs in os.walk(DELIVER) for f in fs)
+    if got != want:
+        missing = sorted(set(want) - set(got))
+        extra = sorted(set(got) - set(want))
+        raise SystemExit(f"❌ 镜像结果与交付目录不一致\n  缺失：{missing[:5]}\n  多余：{extra[:5]}")
+    return len(got)
 
 
 def main():
-    print("== 同步 交付目录 → 仓库 app ==")
-    assert_safe()
-    drop_junction()
-    added, updated, removed, kept, total = mirror()
-    # 校验：仓库内文件清单必须与交付目录一致
-    repo = []
-    for root, _dirs, files in os.walk(REPO_APP):
-        for f in files:
-            repo.append(os.path.relpath(os.path.join(root, f), REPO_APP))
-    if sorted(repo) != sorted(
-            os.path.relpath(os.path.join(r, f), DELIVER)
-            for r, _d, fs in os.walk(DELIVER) for f in fs):
-        raise SystemExit("❌ 镜像结果与交付目录清单不一致，请检查")
-    print(f"  新增 {added}｜更新 {updated}｜删除多余 {removed}｜未变 {kept}"
-          f"｜仓库 app 现有 {len(repo)} 个文件（交付目录 {total} 个）")
-    print("  ✅ 仓库 app 已是真实目录且与交付目录一致")
+    print("== 同步 交付目录 → 仓库 app 与 android 资产目录 ==")
+    failed = 0
+    for target in TARGETS:
+        print(f"\n-- {target}")
+        try:
+            assert_safe(target)
+            drop_junction(target)
+            added, updated, removed, kept = mirror(target)
+            total = verify_against_deliver(target)
+            print(f"  新增 {added}｜更新 {updated}｜删除多余 {removed}｜未变 {kept}"
+                  f"｜现有 {total} 个文件")
+            print("  ✅ 与交付目录逐一致")
+        except SystemExit as e:
+            print(f"  {e}")
+            failed += 1
+    if failed:
+        raise SystemExit(f"❌ {failed} 个目标同步失败")
+    print("\n  ✅ 全部目标同步完成")
     return 0
 
 

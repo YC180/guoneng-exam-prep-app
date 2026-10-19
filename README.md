@@ -22,6 +22,13 @@ app/                 交付给使用者的应用（直接双击 app/index.html �
   可选导入/           可选导入包（专业知识 127 题，**不计入**主题库题量）
   sw.js manifest.webmanifest icons/ start.cmd start.ps1 README.md
 
+android/            Android APK 工程（纯 Java + WebView，**不含原生库** → 32/64 位手机都能装）
+  AndroidManifest.xml src/ res/  清单、外壳与内置 127.0.0.1 静态服务、图标与资源配置
+  make_icons.py     由应用图标生成 5 种密度图标（含 Android 8+ 自适应图标前景）
+  build_apk.py      构建流水线：归档 → aapt2 → javac → d8 → zipalign → apksigner → 自检
+  keystore/         签名密钥（随仓库公开，便于后续版本覆盖升级；见 android/README.md）
+  README.md         APK 构建、结构取舍、签名说明、侧载步骤与验证边界
+
 work/               构建与审计脚本、抽取文本、OCR 结果、结构化题库与各类审计 JSON
   build_bank.py     解析全部来源 → 统一题库（核心）
   finalize_bank.py  答案自洽复核、结构自洽复核、可作答性强制（破坏性，须重建）
@@ -58,6 +65,13 @@ iOS/Android 均可「添加到主屏幕」，断网后照常刷题）。
 
 答题记录只存在**本机浏览器**（IndexedDB → localStorage → 内存 三级降级）；
 「资料与设置」里可导出**完整备份**，换设备时恢复。
+
+**手机安装成 App（Android，推荐给“要在 64 位手机上用”的场景）**：
+用仓库 Release 里的 **`guoneng-exam-prep-app-v1.0.0.apk`**（约 3.9 MB）直接侧载安装，
+桌面出现「国家能源备考」，完全离线可用。APK 为纯 Java + WebView 外壳且**不含原生库**，
+所以 arm64-v8a / armeabi-v7a 设备都能装（`aapt2 dump badging` 中 `native-code` 一栏为空即为实证）。
+构建方法、结构取舍（应用本体打成 ASCII 名 `assets/www.zip` 以绕开 aapt2 中文路径缺陷）、
+签名密钥说明、侧载步骤与**验证边界**见 [`android/README.md`](android/README.md)。
 
 ## 三、怎么重建
 

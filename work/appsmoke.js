@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 
-const APP = 'D:\\DOWNLOADS\\app';
+const APP = process.argv[2] || 'D:\\DOWNLOADS\\app';
 const sandbox = {
   console,
   setTimeout, clearTimeout, setInterval, clearInterval,
