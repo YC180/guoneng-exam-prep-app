@@ -1,5 +1,8 @@
-# 统一行尾：文本文件一律 LF（避免 Windows 检出时 CRLF 反复变动）
-* text=auto eol=lf
+# 行尾：文本文件入库时归一化为 LF，但**不强制工作区必须是 LF**。
+# 原因：应用目录是由 work/sync_app_to_repo.py 从交付目录镜像进来的，
+# 交付目录里的部分文件带 CRLF；若强制 eol=lf，这些文件会一直显示为“已修改”（仅行尾差异）。
+# 用 text=auto 后，git 只在入库时归一化，比较时也对工作区做同样归一化，状态因此保持干净。
+* text=auto
 
 # 二进制资源不做行尾转换
 *.png binary
@@ -8,6 +11,8 @@
 *.ico binary
 *.woff2 binary
 *.zip binary
+*.apk binary
+*.keystore binary
 
 # 生成的题库与抽取文本体量大，diff 无意义，避免污染对比视图
 work/bank/questions.json -diff
